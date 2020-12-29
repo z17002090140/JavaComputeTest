@@ -5,17 +5,18 @@ import java.awt.event.ActionListener;
 
 public class ComputeFrame {
     private static JFrame computeFrame;
-    private static JLabel subject;
+    private static JTextField subject;
     private static JTextField answers;
     static String ID = "0";
     private static JPanel board;
+    private static Subjects subjects;
 
     public void showWindows(){
         computeFrame.setVisible(true);
     }
 
     public ComputeFrame() {
-        computeFrame = new JFrame("Compute:"+ID);
+        computeFrame = new JFrame("欢迎使用四则运算训练器，您当前的账户是："+ID);
         JMenuBar menuBar = new JMenuBar();
         JMenu diff = new JMenu("难度");
         JMenuItem yer = new JMenuItem("幼  儿");
@@ -61,15 +62,31 @@ public class ComputeFrame {
         new ComputeFrame().showWindows();
     }
 
-    public static void Subject(JPanel panel,String type){
+    private static void subjectSet(int level, int methor,JPanel panel,Subjects subjects){
+        globle(panel);
+        subjects.level = level;
+        subjects.methor =methor;
+        subjects.subjects();
+        subject.setText(subjects.subject);
+        answers.setText(""+subjects.answer);
+        panel.repaint();
+    }
+
+    private static void subjectSet(Subjects subjects){
+        subjects.subjects();
+        subject.setText(subjects.subject);
+        answers.setText(""+subjects.answer);
+        board.repaint();
+    }
+
+    private static void Subject(JPanel panel,String type){
+        subjects = Subjects.getInstance();
         switch (type){
             case "幼  儿":{
-                globle(panel);
-                panel.repaint();
+                subjectSet(0  ,1,panel,subjects);
             }break;
             case "小学生":{
-                globle(panel);
-                panel.repaint();
+                subjectSet(100,2,panel,subjects);
             }break;
             case "自定义":{
                 globle(panel);
@@ -78,22 +95,38 @@ public class ComputeFrame {
         }
     }
 
-    public static void globle(JPanel panel){
+    private static void addButtonActionListener(JButton button){
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                subjectSet(subjects);
+            }
+        });
+    }
+
+    private static void globle(JPanel panel){
         Font font = new Font("Times New Roman",Font.BOLD,30);
 
         JLabel equal = new JLabel("=");
         JButton next = new JButton("下一题");
         JButton pre  = new JButton("上一题");
         JButton submit = new JButton("提交");
-        subject = new JLabel("????????????");
+        subject = new JTextField();
         answers = new JTextField(10);
 
+        subject.setEnabled(false);
+        subject.setDisabledTextColor(Color.BLACK);
         subject.setSize(200,40);
         answers.setSize(200,40);
         equal.setSize(60,30);
         next.setSize(80,30);
         pre.setSize(80,30);
         submit.setSize(80,30);
+        pre.setEnabled(false);
+
+        addButtonActionListener(next);
+        addButtonActionListener(submit);
+        addButtonActionListener(pre);
 
         equal.setFont(font);
         subject.setFont(font);
