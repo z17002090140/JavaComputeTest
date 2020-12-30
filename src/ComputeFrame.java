@@ -10,6 +10,7 @@ public class ComputeFrame {
     static String ID = "0";
     private static JPanel board;
     private static Subjects subjects;
+    private static JLabel hiddenLab;
 
     public void showWindows(){
         computeFrame.setVisible(true);
@@ -68,15 +69,48 @@ public class ComputeFrame {
         subjects.methor =methor;
         subjects.subjects();
         subject.setText(subjects.subject);
-        answers.setText(""+subjects.answer);
         panel.repaint();
     }
 
+    private static String answerRegex(String input){
+        String s = input;
+        if (!input.matches("-?[1-9]\\d*")) {
+             s = JOptionPane.showInputDialog("Please input a value");
+             s = answerRegex(s);
+        }
+        return s;
+    }
+
     private static void subjectSet(Subjects subjects){
-        subjects.subjects();
-        subject.setText(subjects.subject);
-        answers.setText(""+subjects.answer);
-        board.repaint();
+        if (Integer.parseInt(answerRegex(answers.getText())) != subjects.answer) {
+            hiddenLab.setText("WrongAnswer 正确答案：" + subjects.answer);
+            hiddenLab.setVisible(true);
+            hiddenLab.setLocation(185,240);
+            board.add(hiddenLab);
+            board.repaint();
+//            try {
+//                Thread.sleep(3000);
+//            }catch (InterruptedException e){
+//                System.out.println(e.getMessage());
+//            }
+        }else{
+            hiddenLab.setText("Accepted!!");
+            hiddenLab.setVisible(true);
+            hiddenLab.setLocation(250,240);
+            board.add(hiddenLab);
+            board.repaint();
+//            try {
+//                Thread.sleep(1000);
+//            }catch (InterruptedException e){
+//                System.out.println(e.getMessage());
+//            }
+        }
+//        hiddenLab.setVisible(false);
+//        subjects.subjects();
+//        subject.setText(subjects.subject);
+//        hiddenLab.setText(""+subjects.answer);
+//        board.repaint();
+
     }
 
     private static void Subject(JPanel panel,String type){
@@ -111,6 +145,7 @@ public class ComputeFrame {
         JButton next = new JButton("下一题");
         JButton pre  = new JButton("上一题");
         JButton submit = new JButton("提交");
+        hiddenLab = new JLabel(""+subjects.answer);
         subject = new JTextField();
         answers = new JTextField(10);
 
@@ -118,10 +153,12 @@ public class ComputeFrame {
         subject.setDisabledTextColor(Color.BLACK);
         subject.setSize(200,40);
         answers.setSize(200,40);
+        hiddenLab.setSize(600,40);
         equal.setSize(60,30);
         next.setSize(80,30);
         pre.setSize(80,30);
         submit.setSize(80,30);
+        hiddenLab.setVisible(false);
         pre.setEnabled(false);
 
         addButtonActionListener(next);
@@ -131,6 +168,7 @@ public class ComputeFrame {
         equal.setFont(font);
         subject.setFont(font);
         answers.setFont(font);
+        hiddenLab.setFont(new Font("MS Song", Font.BOLD, 30));
 
         equal.setLocation(360,200);
         answers.setLocation(410,195);
