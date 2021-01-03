@@ -14,7 +14,7 @@ public class ComputeFrame {
     private static Subjects subjects;
     private static JLabel hiddenLab;
 
-    //三个按钮
+    //四个按钮
     private static JButton submit;
     private static JButton next;
     private static JButton pre;
@@ -132,13 +132,7 @@ public class ComputeFrame {
             board.repaint();
         }
         Record.add(record);
-        if(Record.recordList.size()==3){
-            for(int i=0;i<3;i++){
-                System.out.println(Record.recordList.get(i).toString());
-            }
-        }
     }
-
 
     private static void Subject(JPanel panel, String type) {
         subjects = Subjects.getInstance();
