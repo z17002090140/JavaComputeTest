@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Record {
@@ -49,8 +50,8 @@ public class Record {
         this.flag = flag;
     }
 
-    private static List<Record> recordList = new ArrayList<>();
-    public static Integer index = 0;
+    private List<Record> recordList = new ArrayList<>();
+    private Integer index = 0;
 
     public void add(Record record) {
         recordList.add(record);
@@ -59,6 +60,8 @@ public class Record {
     public Record getCurrent() {
         return recordList.get(index);
     }
+
+    public Integer getIndex() { return index; }
 
     public Record getNext() {
         index++;
