@@ -6,7 +6,16 @@ import java.util.List;
 public class ResultFrame {
     private static JFrame computeResult;
     private static JLabel label;
+    //查询按钮
     private static JButton search;
+    //上一页
+    private static JButton nextPage;
+    //下一页
+    private static JButton prePage;
+
+    //默认分页参数
+    private static Integer current=1;
+    private static Integer size = 15;
 
     private static String[] columnNames={"编号","内容","结果"};
     private static Integer number = 1;
