@@ -1,8 +1,9 @@
+import com.alibaba.fastjson.JSONObject;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 public class ComputeFrame {
     private static JFrame computeFrame;
@@ -17,7 +18,7 @@ public class ComputeFrame {
     private static JButton submit;
     private static JButton next;
     private static JButton pre;
-    private static JButton finish;
+    public static JSONObject object;
 
 //    //上一题和下一题按钮的状态
 //    private static Boolean nextStatus = false;
@@ -71,7 +72,8 @@ public class ComputeFrame {
     }
 
     public static void main(String[] args) {
-        new ComputeFrame().showWindows();
+        ComputeFrame a = new ComputeFrame();
+        a.showWindows();
     }
 
     private static void subjectSet(int level, int methor, JPanel panel, Subjects subjects) {
@@ -144,6 +146,8 @@ public class ComputeFrame {
             }
             break;
             case "自定义": {
+                CustomDialog customDialog = new CustomDialog(computeFrame);
+                System.out.println(customDialog.getCode());
                 globle(panel);
                 panel.repaint();
             }
@@ -154,8 +158,6 @@ public class ComputeFrame {
         Font font = new Font("Times New Roman", Font.BOLD, 30);
 
         JLabel equal = new JLabel("=");
-
-        finish = new JButton("交卷");
 
         next = new JButton("下一题");
         pre = new JButton("上一题");
@@ -174,7 +176,6 @@ public class ComputeFrame {
         next.setSize(80, 30);
         pre.setSize(80, 30);
         submit.setSize(80, 30);
-        finish.setSize(80,30);
         hiddenLab.setVisible(false);
         pre.setEnabled(false);
 
@@ -235,18 +236,7 @@ public class ComputeFrame {
                 }
             }
         });
-        //交卷的事件
-        finish.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //将上一题，下一题，提交按钮置为不可用
-                pre.setEnabled(false);
-                next.setEnabled(false);
-                submit.setEnabled(false);
-                //调用结果窗口
-                new ResultFrame().showWindows();
-            }
-        });
+
         equal.setFont(font);
         subject.setFont(font);
         answers.setFont(font);
@@ -258,7 +248,6 @@ public class ComputeFrame {
         next.setLocation(440, 350);
         submit.setLocation(330, 350);
         pre.setLocation(220, 350);
-        finish.setLocation(550,350);
 
         panel.setLayout(null);
         panel.add(answers);
@@ -267,6 +256,5 @@ public class ComputeFrame {
         panel.add(next);
         panel.add(pre);
         panel.add(submit);
-        panel.add(finish);
     }
 }
