@@ -192,6 +192,7 @@ public class ComputeFrame {
         next.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 //通过判断提交按钮的情况来确定是在浏览过往题目还是正常的点下一题
                 if(!submit.isEnabled()&&Record.getIndex().equals(Record.recordList.size()-1)) {
                     //将上一题的结果隐藏
