@@ -65,6 +65,10 @@ public class Record {
     //对象数组用来存储做过的题目
     public static List<Record> recordList = new ArrayList<>();
 
+    public static List<Record> getRecordList() {
+        return recordList;
+    }
+
     //通过下标来确定访问的内容
     public static Integer index = -1;
 
