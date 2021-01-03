@@ -77,7 +77,8 @@ public class LoginFrame {
                 if(strJSON.getString("msg").equals("成功")){
                     ComputeFrame.ID = strJSON.getString("data");
                     computeLogin.setVisible(false);
-                    new ComputeFrame().showWindows();
+                    ComputeFrame a = new ComputeFrame();
+                    a.showWindows();
                 }
             }
         });

@@ -1,9 +1,9 @@
+import com.alibaba.fastjson.JSONObject;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class ComputeFrame {
     private static JFrame computeFrame;
@@ -13,6 +13,16 @@ public class ComputeFrame {
     private static JPanel board;
     private static Subjects subjects;
     private static JLabel hiddenLab;
+
+    //三个按钮
+    private static JButton submit;
+    private static JButton next;
+    private static JButton pre;
+    public static JSONObject object;
+
+//    //上一题和下一题按钮的状态
+//    private static Boolean nextStatus = false;
+//    private static Boolean preStatus = false;
 
     public void showWindows() {
         computeFrame.setVisible(true);
@@ -62,7 +72,8 @@ public class ComputeFrame {
     }
 
     public static void main(String[] args) {
-        new ComputeFrame().showWindows();
+        ComputeFrame a = new ComputeFrame();
+        a.showWindows();
     }
 
     private static void subjectSet(int level, int methor, JPanel panel, Subjects subjects) {
@@ -74,57 +85,60 @@ public class ComputeFrame {
         panel.repaint();
     }
 
-//    private static String answerRegex(String input){
-//        String s = input;
-//        if(s!=null){
-//            if (!input.matches("-?[1-9]\\d*")) {
-//                s = JOptionPane.showInputDialog("Please input a value");
-//                s = answerRegex(s);
-//            }
-//            return s;
-//        }
-//        return null;
-//    }
-
+    //提交事件
     private static void subjectSet(Subjects subjects) {
         String str = answers.getText();
         Integer ans = null;
-        Thread repainter = null;
         try {
             ans = Integer.parseInt(str);
         } catch (Exception e) {
             hiddenLab.setText("请输入一个数字作答");
+            hiddenLab.setVisible(true);
+            hiddenLab.setLocation(185, 240);
+            board.add(hiddenLab);
+            board.repaint();
         }
+        //创建一个Record类 用于在本地记录做下的题目
+        Record record = new Record();
+        //获取算式和输入的答案
+        record.setContent(subjects.subject);
+        record.setAns(answers.getText());
+
         if (ans != null) {
-            answers.setEnabled(false);
             if (!ans.equals(subjects.answer)) {
                 hiddenLab.setText("WrongAnswer 正确答案：" + subjects.answer);
                 hiddenLab.setVisible(true);
                 hiddenLab.setLocation(185, 240);
                 board.add(hiddenLab);
                 board.repaint();
-
+                record.setFlag(0);
+                record.setStatus("WrongAnswer 正确答案：" + subjects.answer);
             } else {
                 hiddenLab.setText("Accepted!!");
                 hiddenLab.setVisible(true);
                 hiddenLab.setLocation(250, 240);
                 board.add(hiddenLab);
                 board.repaint();
+                record.setFlag(1);
+                record.setStatus("Accepted!!");
             }
-//        hiddenLab.setVisible(false);
-//        subjects.subjects();
-//        subject.setText(subjects.subject);
-//        hiddenLab.setText(""+subjects.answer);
-//        board.repaint();
-
+            answers.setEditable(false);
+            submit.setEnabled(false);
         }else{
             hiddenLab.setText("请输入一个数字作答");
             hiddenLab.setVisible(true);
-            hiddenLab.setLocation(250, 240);
+            hiddenLab.setLocation(185, 240);
             board.add(hiddenLab);
             board.repaint();
         }
+        Record.add(record);
+        if(Record.recordList.size()==3){
+            for(int i=0;i<3;i++){
+                System.out.println(Record.recordList.get(i).toString());
+            }
+        }
     }
+
 
     private static void Subject(JPanel panel, String type) {
         subjects = Subjects.getInstance();
@@ -138,28 +152,23 @@ public class ComputeFrame {
             }
             break;
             case "自定义": {
+                CustomDialog customDialog = new CustomDialog(computeFrame);
+                System.out.println(customDialog.getCode());
                 globle(panel);
                 panel.repaint();
             }
         }
     }
 
-    private static void addButtonActionListener(JButton button) {
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                subjectSet(subjects);
-            }
-        });
-    }
-
     private static void globle(JPanel panel) {
         Font font = new Font("Times New Roman", Font.BOLD, 30);
 
         JLabel equal = new JLabel("=");
-        JButton next = new JButton("下一题");
-        JButton pre = new JButton("上一题");
-        JButton submit = new JButton("提交");
+
+        next = new JButton("下一题");
+        pre = new JButton("上一题");
+        submit = new JButton("提交");
+
         hiddenLab = new JLabel("" + subjects.answer);
         subject = new JTextField();
         answers = new JTextField(10);
@@ -176,9 +185,62 @@ public class ComputeFrame {
         hiddenLab.setVisible(false);
         pre.setEnabled(false);
 
-        addButtonActionListener(next);
-        addButtonActionListener(submit);
-        addButtonActionListener(pre);
+        //给提交按钮添加事件
+        submit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                subjectSet(subjects);
+                //将上一题按钮置为可用
+                pre.setEnabled(true);
+            }
+        });
+
+        //给下一题按钮添加事件 刷新题目
+        next.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //通过判断提交按钮的情况来确定是在浏览过往题目还是正常的点下一题
+                if(!submit.isEnabled()&&Record.getIndex().equals(Record.recordList.size()-1)) {
+                    //将上一题的结果隐藏
+                    hiddenLab.setVisible(false);
+                    //设置答案框为可编辑状态 设置答案为空
+                    answers.setEditable(true);
+                    answers.setText("");
+                    //启用提交按钮
+                    submit.setEnabled(true);
+                    //重新生成题目
+                    subjects.subjects();
+                    subject.setText(subjects.subject);
+                    board.repaint();
+                }else{
+                    Record record = Record.getNext();
+                    pre.setEnabled(true);
+                    answers.setText(record.getAns());
+                    subject.setText(record.getContent());
+                    hiddenLab.setText(record.getStatus());
+                    board.repaint();
+                }
+            }
+        });
+
+        //浏览上一题的事件
+        pre.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //只有已提交当前题目后才可以点击上一题按钮
+                if(!submit.isEnabled()){
+                    Record record = Record.getPre();
+                    //到达第一条记录时不可以在点击上一题
+                    if(Record.getIndex()==0){
+                        pre.setEnabled(false);
+                    }
+                    answers.setText(record.getAns());
+                    subject.setText(record.getContent());
+                    hiddenLab.setText(record.getStatus());
+                    board.repaint();
+                }
+            }
+        });
 
         equal.setFont(font);
         subject.setFont(font);
