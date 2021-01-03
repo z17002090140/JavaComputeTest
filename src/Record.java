@@ -2,38 +2,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Record {
-    private Long userId;
-
     private String content;
 
     private String ans;
 
+    private String status;
+
     private Integer flag;
 
-    public Record(Long userId, String content, String ans, Integer flag) {
-        this.userId = userId;
+    public Record(String content, String ans,String status, Integer flag) {
         this.content = content;
-        this.flag = flag;
         this.ans = ans;
+        this.status = status;
+        this.flag = flag;
     }
 
     public Record() {
-    }
-
-    public String getAns() {
-        return ans;
-    }
-
-    public void setAns(String ans) {
-        this.ans = ans;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public String getContent() {
@@ -44,6 +28,22 @@ public class Record {
         this.content = content;
     }
 
+    public String getAns() {
+        return ans;
+    }
+
+    public void setAns(String ans) {
+        this.ans = ans;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public Integer getFlag() {
         return flag;
     }
@@ -52,41 +52,49 @@ public class Record {
         this.flag = flag;
     }
 
+    @Override
+    public String toString() {
+        return "Record{" +
+                "content='" + content + '\'' +
+                ", ans='" + ans + '\'' +
+                ", status='" + status + '\'' +
+                ", flag=" + flag +
+                '}';
+    }
+
     //对象数组用来存储做过的题目
     public static List<Record> recordList = new ArrayList<>();
 
     //通过下标来确定访问的内容
-    public static Integer index = 0;
+    public static Integer index = -1;
 
     public static Integer getIndex() {
         return index;
     }
 
-    public static void setIndex(Integer index) {
+    public void setIndex(Integer index) {
         Record.index = index;
     }
 
-    public void add(Record record) {
+    public static void add(Record record) {
         index++;
         recordList.add(record);
     }
 
-    public Record getCurrent() {
+    public static Record getCurrent() {
         return recordList.get(index);
     }
 
-    public Record getNext() {
-        index++;
-        if (index > recordList.size()) {
-            index = recordList.size();
+    public static Record getNext() {
+        if (index < recordList.size()-1) {
+            index++;
         }
         return recordList.get(index);
     }
 
-    public Record getPre() {
-        index--;
-        if (index < 0) {
-            index = 0;
+    public static Record getPre() {
+        if (index > 0) {
+            index--;
         }
         return recordList.get(index);
     }
