@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ComputeFrame {
     private static JFrame computeFrame;
@@ -87,34 +89,27 @@ public class ComputeFrame {
     private static void subjectSet(Subjects subjects) {
         String str = answers.getText();
         Integer ans = null;
+        Thread repainter = null;
         try {
             ans = Integer.parseInt(str);
         } catch (Exception e) {
             hiddenLab.setText("请输入一个数字作答");
         }
         if (ans != null) {
+            answers.setEnabled(false);
             if (!ans.equals(subjects.answer)) {
                 hiddenLab.setText("WrongAnswer 正确答案：" + subjects.answer);
                 hiddenLab.setVisible(true);
                 hiddenLab.setLocation(185, 240);
                 board.add(hiddenLab);
                 board.repaint();
-//            try {
-//                Thread.sleep(3000);
-//            }catch (InterruptedException e){
-//                System.out.println(e.getMessage());
-//            }
+
             } else {
                 hiddenLab.setText("Accepted!!");
                 hiddenLab.setVisible(true);
                 hiddenLab.setLocation(250, 240);
                 board.add(hiddenLab);
                 board.repaint();
-//            try {
-//                Thread.sleep(1000);
-//            }catch (InterruptedException e){
-//                System.out.println(e.getMessage());
-//            }
             }
 //        hiddenLab.setVisible(false);
 //        subjects.subjects();
@@ -122,8 +117,13 @@ public class ComputeFrame {
 //        hiddenLab.setText(""+subjects.answer);
 //        board.repaint();
 
+        }else{
+            hiddenLab.setText("请输入一个数字作答");
+            hiddenLab.setVisible(true);
+            hiddenLab.setLocation(250, 240);
+            board.add(hiddenLab);
+            board.repaint();
         }
-
     }
 
     private static void Subject(JPanel panel, String type) {
