@@ -13,7 +13,7 @@ public class Subjects {
     int methor = 4;
     Random r;
     String subject;
-    Integer answer = 0;
+    Integer answer = null;
 
     private Subjects(Random r) {
         this.r = r;

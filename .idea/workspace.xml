@@ -39,6 +39,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="2" />
+    <option name="y" value="43" />
+    <option name="width" value="1146" />
+    <option name="height" value="844" />
+  </component>
   <component name="ProjectId" id="1mY8Rqe3YFFKnsMjdw4zFrskG53" />
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
@@ -47,6 +53,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
   </component>
