@@ -72,18 +72,6 @@ public class ComputeFrame {
         panel.repaint();
     }
 
-//    private static String answerRegex(String input){
-//        String s = input;
-//        if(s!=null){
-//            if (!input.matches("-?[1-9]\\d*")) {
-//                s = JOptionPane.showInputDialog("Please input a value");
-//                s = answerRegex(s);
-//            }
-//            return s;
-//        }
-//        return null;
-//    }
-
     private static void subjectSet(Subjects subjects) {
         String str = answers.getText();
         Integer ans = null;
@@ -91,7 +79,17 @@ public class ComputeFrame {
             ans = Integer.parseInt(str);
         } catch (Exception e) {
             hiddenLab.setText("请输入一个数字作答");
+            hiddenLab.setVisible(true);
+            hiddenLab.setLocation(185, 240);
+            board.add(hiddenLab);
+            board.repaint();
         }
+        //创建一个Record类 用于在本地记录做下的题目
+        Record record = new Record();
+        //获取算式和输入的答案
+        record.setContent(subjects.subject);
+        record.setAns(answers.getText());
+
         if (ans != null) {
             if (!ans.equals(subjects.answer)) {
                 hiddenLab.setText("WrongAnswer 正确答案：" + subjects.answer);
@@ -99,31 +97,24 @@ public class ComputeFrame {
                 hiddenLab.setLocation(185, 240);
                 board.add(hiddenLab);
                 board.repaint();
-//            try {
-//                Thread.sleep(3000);
-//            }catch (InterruptedException e){
-//                System.out.println(e.getMessage());
-//            }
+                record.setFlag(0);
             } else {
                 hiddenLab.setText("Accepted!!");
                 hiddenLab.setVisible(true);
                 hiddenLab.setLocation(250, 240);
                 board.add(hiddenLab);
                 board.repaint();
-//            try {
-//                Thread.sleep(1000);
-//            }catch (InterruptedException e){
-//                System.out.println(e.getMessage());
-//            }
+                record.setFlag(1);
             }
-//        hiddenLab.setVisible(false);
-//        subjects.subjects();
-//        subject.setText(subjects.subject);
-//        hiddenLab.setText(""+subjects.answer);
-//        board.repaint();
-
+            answers.setEditable(false);
+        }else{
+            hiddenLab.setText("请输入一个数字作答");
+            hiddenLab.setVisible(true);
+            hiddenLab.setLocation(185, 240);
+            board.add(hiddenLab);
+            board.repaint();
         }
-
+        Record.recordList.add(record);
     }
 
     private static void Subject(JPanel panel, String type) {

@@ -2,27 +2,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Record {
-    private Long ID;
-
     private Long userId;
 
     private String content;
 
+    private String ans;
+
     private Integer flag;
 
-    public Record(Long ID, Long userId, String content, Integer flag) {
-        this.ID = ID;
+    public Record(Long userId, String content, String ans, Integer flag) {
         this.userId = userId;
         this.content = content;
         this.flag = flag;
+        this.ans = ans;
     }
 
-    public Long getID() {
-        return ID;
+    public Record() {
     }
 
-    public void setID(Long ID) {
-        this.ID = ID;
+    public String getAns() {
+        return ans;
+    }
+
+    public void setAns(String ans) {
+        this.ans = ans;
     }
 
     public Long getUserId() {
@@ -49,10 +52,22 @@ public class Record {
         this.flag = flag;
     }
 
-    private static List<Record> recordList = new ArrayList<>();
+    //对象数组用来存储做过的题目
+    public static List<Record> recordList = new ArrayList<>();
+
+    //通过下标来确定访问的内容
     public static Integer index = 0;
 
+    public static Integer getIndex() {
+        return index;
+    }
+
+    public static void setIndex(Integer index) {
+        Record.index = index;
+    }
+
     public void add(Record record) {
+        index++;
         recordList.add(record);
     }
 
