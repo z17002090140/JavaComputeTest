@@ -17,7 +17,6 @@ public class Subjects {
 
     private Subjects(Random r) {
         this.r = r;
-
     }
 
     public void subjects(){
@@ -48,7 +47,6 @@ public class Subjects {
                 numList.add(r.nextInt(10)+1);
             else {
                 numList.add(r.nextInt(level * 10)/10+1);
-                //
             }
         }
 
