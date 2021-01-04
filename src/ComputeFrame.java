@@ -1,3 +1,4 @@
+import DTO.RecordDTO;
 import com.alibaba.fastjson.JSONObject;
 
 import javax.swing.*;
@@ -21,12 +22,31 @@ public class ComputeFrame {
     private static JButton finish;
     public static JSONObject object;
 
+
 //    //上一题和下一题按钮的状态
 //    private static Boolean nextStatus = false;
 //    private static Boolean preStatus = false;
 
     public void showWindows() {
         computeFrame.setVisible(true);
+    }
+
+    //初始化事件 用于
+    public static void initFrame(){
+        //提示label默认不显示
+        hiddenLab.setVisible(false);
+        //上一题和下一题按钮默认不可用
+        pre.setEnabled(false);
+        next.setEnabled(false);
+        //提交按钮默认可用
+        submit.setEnabled(true);
+        //答案输入框默认可用
+        answers.setEnabled(true);
+        //答案输入框内容置空
+        answers.setText("");
+        //交卷按钮默认可用
+        finish.setEnabled(true);
+
     }
 
     public ComputeFrame() {
@@ -86,9 +106,20 @@ public class ComputeFrame {
         panel.repaint();
     }
 
+    private static void subjectSet(int level, int methor,String banMessage, JPanel panel, Subjects subjects) {
+        globle(panel);
+        subjects.level = level;
+        subjects.methor = methor;
+        subjects.banMes = banMessage;
+        subjects.subjects();
+        subject.setText(subjects.subject);
+        panel.repaint();
+    }
+
     //提交事件
     private static void subjectSet(Subjects subjects) {
         String str = answers.getText();
+        System.out.println(str);
         Integer ans = null;
         try {
             ans = Integer.parseInt(str);
@@ -101,11 +132,17 @@ public class ComputeFrame {
         }
         //创建一个Record类 用于在本地记录做下的题目
         Record record = new Record();
-        //获取算式和输入的答案
-        record.setContent(subjects.subject);
-        record.setAns(answers.getText());
+        //recordDTO类用于与后端继续交互
+        RecordDTO recordDTO = new RecordDTO();
+        recordDTO.setUserId(Long.parseLong(ID));
 
         if (ans != null) {
+            //获取算式和输入的答案
+            record.setContent(subjects.subject);
+            record.setAns(answers.getText());
+
+            recordDTO.setContent(subjects.subject+"="+answers.getText());
+
             if (!ans.equals(subjects.answer)) {
                 hiddenLab.setText("WrongAnswer 正确答案：" + subjects.answer);
                 hiddenLab.setVisible(true);
@@ -113,6 +150,7 @@ public class ComputeFrame {
                 board.add(hiddenLab);
                 board.repaint();
                 record.setFlag(0);
+                recordDTO.setFlag(0);
                 record.setStatus("WrongAnswer 正确答案：" + subjects.answer);
             } else {
                 hiddenLab.setText("Accepted!!");
@@ -121,10 +159,17 @@ public class ComputeFrame {
                 board.add(hiddenLab);
                 board.repaint();
                 record.setFlag(1);
+                recordDTO.setFlag(1);
                 record.setStatus("Accepted!!");
             }
             answers.setEditable(false);
             submit.setEnabled(false);
+            //将上一题按钮置为可用
+            pre.setEnabled(true);
+            next.setEnabled(true);
+
+            Record.add(record);
+            addRecord(recordDTO);
         }else{
             hiddenLab.setText("请输入一个数字作答");
             hiddenLab.setVisible(true);
@@ -132,7 +177,12 @@ public class ComputeFrame {
             board.add(hiddenLab);
             board.repaint();
         }
-        Record.add(record);
+    }
+
+    //后端新增一条记录
+    private static void addRecord(RecordDTO recordDTO){
+        API.doPost(API.AddRecord,"userId="+recordDTO.getUserId()+"&content="+recordDTO.getContent()+"&flag="+recordDTO.getFlag());
+
     }
 
     private static void Subject(JPanel panel, String type) {
@@ -148,11 +198,14 @@ public class ComputeFrame {
             break;
             case "自定义": {
                 CustomDialog customDialog = new CustomDialog(computeFrame);
-                System.out.println(customDialog.getCode());
+                object = customDialog.getCode();
+                //System.out.println(customDialog.getCode());
+                subjectSet(object.getIntValue("level"),object.getIntValue("times"),object.getString("methor"),panel,subjects);
                 globle(panel);
                 panel.repaint();
             }
         }
+        initFrame();
     }
 
     private static void globle(JPanel panel) {
@@ -180,16 +233,16 @@ public class ComputeFrame {
         pre.setSize(80, 30);
         submit.setSize(80, 30);
         finish.setSize(80,30);
-        hiddenLab.setVisible(false);
-        pre.setEnabled(false);
+//        hiddenLab.setVisible(false);
+//        //上一题和下一题按钮默认不可用
+//        pre.setEnabled(false);
+//        next.setEnabled(false);
 
         //给提交按钮添加事件
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 subjectSet(subjects);
-                //将上一题按钮置为可用
-                pre.setEnabled(true);
             }
         });
 
@@ -197,7 +250,6 @@ public class ComputeFrame {
         next.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 //通过判断提交按钮的情况来确定是在浏览过往题目还是正常的点下一题
                 if(!submit.isEnabled()&&Record.getIndex().equals(Record.recordList.size()-1)) {
                     //将上一题的结果隐藏
@@ -212,12 +264,17 @@ public class ComputeFrame {
                     subject.setText(subjects.subject);
                     board.repaint();
                 }else{
-                    Record record = Record.getNext();
-                    pre.setEnabled(true);
-                    answers.setText(record.getAns());
-                    subject.setText(record.getContent());
-                    hiddenLab.setText(record.getStatus());
-                    board.repaint();
+                    try{
+                        Record record = Record.getNext();
+                        pre.setEnabled(true);
+                        answers.setText(record.getAns());
+                        subject.setText(record.getContent());
+                        hiddenLab.setText(record.getStatus());
+                        board.repaint();
+                    }catch (Exception exception){
+                        System.out.println("Error");
+                    }
+
                 }
             }
         });
@@ -249,7 +306,7 @@ public class ComputeFrame {
                 next.setEnabled(false);
                 submit.setEnabled(false);
                 //调用结果窗口
-                new ResultFrame().showWindows();
+                new ResultFrame("结果").showWindows();
             }
         });
         equal.setFont(font);
