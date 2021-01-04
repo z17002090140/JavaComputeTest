@@ -10,7 +10,6 @@ import java.io.IOException;
 
 //导出为Excel
 public class ExportExcel {
-
     JTable table;
     FileOutputStream fos;
 
