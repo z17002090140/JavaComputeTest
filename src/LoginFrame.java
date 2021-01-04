@@ -1,12 +1,9 @@
 import com.alibaba.fastjson.JSONObject;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class LoginFrame {
 
@@ -18,12 +15,44 @@ public class LoginFrame {
     public LoginFrame() {
         computeLogin = new JFrame("Login");
         JPanel loginPanel = new JPanel();
-        JButton submit = new JButton("Submit");
+        JButton submit = new JButton("登录");
         username = new JTextField(10);
         password = new JTextField(10);
         JLabel user = new JLabel("User:");
         JLabel pwd  = new JLabel("Pwd:");
         getreturn = new JLabel("");
+
+        JButton signin = new JButton("注册");
+        Font newfont = new Font("宋体",0,12);
+        signin.setFont(newfont);
+        signin.setBorderPainted(false);
+        signin.setFocusPainted(false);
+        signin.setBackground(new Color(238, 238, 238));
+        signin.setSize(60,20);
+        signin.setLocation(110,190);
+        signin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                submit.setText("注册");
+                loginPanel.remove(signin);
+
+                submit.removeActionListener(action);
+                submit.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        String user = username.getText();
+                        String pwd  = password.getText();
+                        if (user.length() > 0 && pwd.length() > 6) {
+                            API.doPost(API.AddUser,"username="+user+"&password="+pwd);
+                            Action(user, pwd);
+                        }else {
+                            JOptionPane.showMessageDialog(computeLogin,"错误的输入！");
+                        }
+                    }
+                });
+                loginPanel.repaint();
+            }
+        });
 
         computeLogin.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-220,Toolkit.getDefaultToolkit().getScreenSize().height/2-320);
         loginPanel.setSize(200,300);
@@ -40,8 +69,8 @@ public class LoginFrame {
         pwd. setSize(30,30);
         user.setLocation(30,50);
         pwd. setLocation(30,90);
-        username.setSize(120,30);
-        password.setSize(120,30);
+        username.setSize(105,30);
+        password.setSize(105,30);
         username.setLocation(70,50);
         password.setLocation(70,90);
         username.setText("admin");
@@ -56,32 +85,41 @@ public class LoginFrame {
         loginPanel.add(password);
         loginPanel.add(submit);
         loginPanel.add(getreturn);
+        loginPanel.add(signin);
         computeLogin.add(loginPanel);
+    }
+
+    private static void Action(String user, String pwd) {
+        String get = API.doPost(API.LoginURL,"username="+user+"&password="+pwd);
+        JSONObject strJSON = JSONObject.parseObject(get);
+        getreturn.setText(strJSON.getString("data"));
+
+        if(strJSON.getString("msg").equals("成功")){
+            ComputeFrame.ID = strJSON.getString("data");
+            ComputeFrame.name = user;
+            computeLogin.setVisible(false);
+            ComputeFrame a = new ComputeFrame();
+            a.showWindows();
+        }
     }
 
     public void showWindows(){
         computeLogin.setVisible(true);
     }
 
+    private static ActionListener action;
+
     private static void addActionListener(JButton button){
-        button.addActionListener(new ActionListener() {
+         action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String user = username.getText();
                 String pwd  = password.getText();
 
-                String get = API.doPost(API.LoginURL,"username="+user+"&password="+pwd);
-                JSONObject strJSON = JSONObject.parseObject(get);
-                getreturn.setText(strJSON.getString("data"));
-
-                if(strJSON.getString("msg").equals("成功")){
-                    ComputeFrame.ID = strJSON.getString("data");
-                    computeLogin.setVisible(false);
-                    ComputeFrame a = new ComputeFrame();
-                    a.showWindows();
-                }
+                Action(user, pwd);
             }
-        });
+        };
+        button.addActionListener(action);
     }
 
     public static void main(String[] args) {

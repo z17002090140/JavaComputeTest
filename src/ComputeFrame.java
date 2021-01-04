@@ -11,6 +11,7 @@ public class ComputeFrame {
     private static JTextField subject;
     private static JTextField answers;
     static String ID = "0";
+    static String name = null;
     private static JPanel board;
     private static Subjects subjects;
     private static JLabel hiddenLab;
@@ -49,8 +50,21 @@ public class ComputeFrame {
     }
 
     public ComputeFrame() {
-        computeFrame = new JFrame("欢迎使用四则运算训练器，您当前的账户是：" + ID);
+        computeFrame = new JFrame("欢迎使用四则运算训练器，您当前的账户是：" + name);
         JMenuBar menuBar = new JMenuBar();
+
+        JButton result = new JButton("查看历史");
+        result.setBorderPainted(false);
+        result.setFocusPainted(false);
+        result.setBackground(Color.lightGray);
+        result.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SearchFrame searchFrame = new SearchFrame();
+                searchFrame.showWindows();
+            }
+        });
+
         diff = new JMenu("难度:");
         JMenuItem yer = new JMenuItem("幼  儿");
         JMenuItem xxs = new JMenuItem("小学生");
@@ -78,6 +92,7 @@ public class ComputeFrame {
         diff.addSeparator();
         diff.add(zdy);
         menuBar.add(diff);
+        menuBar.add(result);
         computeFrame.add(menuBar);
         computeFrame.add(board);
     }
@@ -170,7 +185,7 @@ public class ComputeFrame {
             next.setEnabled(true);
 
             Record.add(record);
-//            addRecord(recordDTO);
+            addRecord(recordDTO);
         }else{
             hiddenLab.setText("请输入一个数字作答");
             hiddenLab.setVisible(true);
