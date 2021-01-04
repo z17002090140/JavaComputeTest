@@ -14,6 +14,7 @@ public class ComputeFrame {
     private static JPanel board;
     private static Subjects subjects;
     private static JLabel hiddenLab;
+    private static JMenu diff;
 
     //四个按钮
     private static JButton submit;
@@ -21,6 +22,9 @@ public class ComputeFrame {
     private static JButton pre;
     private static JButton finish;
     public static JSONObject object;
+
+    //控件加载判断开关
+    private static boolean flag = false;
 
     public void showWindows() {
         computeFrame.setVisible(true);
@@ -35,19 +39,19 @@ public class ComputeFrame {
         next.setEnabled(false);
         //提交按钮默认可用
         submit.setEnabled(true);
-        //答案输入框默认可用
-        answers.setEnabled(true);
         //答案输入框内容置空
         answers.setText("");
+        //答案输入框默认可用
+        answers.setEnabled(true);
         //交卷按钮默认可用
         finish.setEnabled(true);
-        computeFrame.repaint();
+        board.repaint();
     }
 
     public ComputeFrame() {
         computeFrame = new JFrame("欢迎使用四则运算训练器，您当前的账户是：" + ID);
         JMenuBar menuBar = new JMenuBar();
-        JMenu diff = new JMenu("难度");
+        diff = new JMenu("难度:");
         JMenuItem yer = new JMenuItem("幼  儿");
         JMenuItem xxs = new JMenuItem("小学生");
         JMenuItem zdy = new JMenuItem("自定义");
@@ -82,7 +86,9 @@ public class ComputeFrame {
         item.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                diff.setText(diff.getText() + "  " + item.getText());
                 Subject(board, item.getText());
+                diff.setEnabled(false);
             }
         });
     }
@@ -157,7 +163,7 @@ public class ComputeFrame {
                 recordDTO.setFlag(1);
                 record.setStatus("Accepted!!");
             }
-            answers.setEditable(false);
+            answers.setEnabled(false);
             submit.setEnabled(false);
             //将上一题按钮置为可用
             pre.setEnabled(true);
@@ -182,6 +188,7 @@ public class ComputeFrame {
 
     private static void Subject(JPanel panel, String type) {
         subjects = Subjects.getInstance();
+
         switch (type) {
             case "幼  儿": {
                 subjectSet(0, 1, panel, subjects);
@@ -195,7 +202,7 @@ public class ComputeFrame {
                 CustomDialog customDialog = new CustomDialog(computeFrame);
                 object = customDialog.getCode();
                 subjectSet(object.getIntValue("level"),object.getIntValue("times"),object.getString("methor"),panel,subjects);
-                globle(panel);
+//                globle(panel);
                 panel.repaint();
             }
         }
@@ -203,123 +210,139 @@ public class ComputeFrame {
     }
 
     private static void globle(JPanel panel) {
-        board.removeAll();
-        Font font = new Font("Times New Roman", Font.BOLD, 30);
+        if (!flag) {
+            Font font = new Font("Times New Roman", Font.BOLD, 30);
 
-        JLabel equal = new JLabel("=");
+            JLabel equal = new JLabel("=");
 
-        finish = new JButton("交卷");
+            finish = new JButton("交卷");
 
-        next = new JButton("下一题");
-        pre = new JButton("上一题");
-        submit = new JButton("提交");
+            next = new JButton("下一题");
+            pre = new JButton("上一题");
+            submit = new JButton("提交");
 
-        hiddenLab = new JLabel("" + subjects.answer);
-        subject = new JTextField();
-        answers = new JTextField(10);
+            hiddenLab = new JLabel("" + subjects.answer);
+            subject = new JTextField();
+            answers = new JTextField(10);
 
-        subject.setEnabled(false);
-        subject.setDisabledTextColor(Color.BLACK);
-        subject.setSize(200, 40);
-        answers.setSize(200, 40);
-        hiddenLab.setSize(600, 40);
-        equal.setSize(60, 30);
-        next.setSize(80, 30);
-        pre.setSize(80, 30);
-        submit.setSize(80, 30);
-        finish.setSize(80,30);
+            subject.setEnabled(false);
+            subject.setDisabledTextColor(Color.BLACK);
+            subject.setSize(200, 40);
+            answers.setSize(200, 40);
+            answers.setDisabledTextColor(Color.BLACK);
+            hiddenLab.setSize(600, 40);
+            equal.setSize(60, 30);
+            next.setSize(80, 30);
+            pre.setSize(80, 30);
+            submit.setSize(80, 30);
+            finish.setSize(80,30);
 
-        //给提交按钮添加事件
-        submit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                subjectSet(subjects);
-            }
-        });
+            //给提交按钮添加事件
+            submit.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    subjectSet(subjects);
+                }
+            });
 
-        //给下一题按钮添加事件 刷新题目
-        next.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //通过判断提交按钮的情况来确定是在浏览过往题目还是正常的点下一题
-                if(!submit.isEnabled()&&Record.getIndex().equals(Record.recordList.size()-1)) {
-                    //将上一题的结果隐藏
-                    hiddenLab.setVisible(false);
-                    //设置答案框为可编辑状态 设置答案为空
-                    answers.setEditable(true);
-                    answers.setText("");
-                    //启用提交按钮
-                    submit.setEnabled(true);
-                    //重新生成题目
-                    subjects.subjects();
-                    subject.setText(subjects.subject);
-                    board.repaint();
-                }else{
-                    try{
-                        Record record = Record.getNext();
-                        pre.setEnabled(true);
+            //给下一题按钮添加事件 刷新题目
+            next.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    //通过判断提交按钮的情况来确定是在浏览过往题目还是正常的点下一题
+                    if(!submit.isEnabled()&&Record.getIndex().equals(Record.recordList.size()-1)) {
+                        //将上一题的结果隐藏
+                        hiddenLab.setVisible(false);
+                        //设置答案框为可编辑状态 设置答案为空
+                        answers.setEditable(true);
+                        answers.setText("");
+                        //启用提交按钮
+                        submit.setEnabled(true);
+                        //重新生成题目
+                        subjects.subjects();
+                        subject.setText(subjects.subject);
+                        board.repaint();
+                    }else{
+                        try{
+                            Record record = Record.getNext();
+                            pre.setEnabled(true);
+                            answers.setText(record.getAns());
+                            subject.setText(record.getContent());
+                            hiddenLab.setText(record.getStatus());
+                            board.repaint();
+                        }catch (Exception exception){
+                            System.out.println("Error");
+                        }
+
+                    }
+                }
+            });
+
+            //浏览上一题的事件
+            pre.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    //只有已提交当前题目后才可以点击上一题按钮
+                    if(!submit.isEnabled()){
+                        Record record = Record.getPre();
+                        //到达第一条记录时不可以在点击上一题
+                        if(Record.getIndex()==0){
+                            pre.setEnabled(false);
+                        }
                         answers.setText(record.getAns());
                         subject.setText(record.getContent());
                         hiddenLab.setText(record.getStatus());
                         board.repaint();
-                    }catch (Exception exception){
-                        System.out.println("Error");
                     }
-
                 }
-            }
-        });
-
-        //浏览上一题的事件
-        pre.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //只有已提交当前题目后才可以点击上一题按钮
-                if(!submit.isEnabled()){
-                    Record record = Record.getPre();
-                    //到达第一条记录时不可以在点击上一题
-                    if(Record.getIndex()==0){
-                        pre.setEnabled(false);
-                    }
-                    answers.setText(record.getAns());
-                    subject.setText(record.getContent());
-                    hiddenLab.setText(record.getStatus());
-                    board.repaint();
+            });
+            //交卷的事件
+            finish.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    subject.setText("");
+                    answers.setText("");
+                    hiddenLab.setVisible(false);
+                    //将上一题，下一题，提交按钮置为不可用
+                    pre.setEnabled(false);
+                    next.setEnabled(false);
+                    submit.setEnabled(false);
+                    //调用结果窗口
+                    new ResultFrame("结果").showWindows();
+                    //允许新游戏开始
+                    diff.setText("难度:");
+                    diff.setEnabled(true);
+                    answers.setEnabled(true);
                 }
-            }
-        });
-        //交卷的事件
-        finish.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //将上一题，下一题，提交按钮置为不可用
-                pre.setEnabled(false);
-                next.setEnabled(false);
-                submit.setEnabled(false);
-                //调用结果窗口
-                new ResultFrame("结果").showWindows();
-            }
-        });
-        equal.setFont(font);
-        subject.setFont(font);
-        answers.setFont(font);
-        hiddenLab.setFont(new Font("MS Song", Font.BOLD, 30));
+            });
+            equal.setFont(font);
+            subject.setFont(font);
+            answers.setFont(font);
+            hiddenLab.setFont(new Font("MS Song", Font.BOLD, 30));
 
-        equal.setLocation(360, 200);
-        answers.setLocation(410, 195);
-        subject.setLocation(110, 195);
-        next.setLocation(440, 350);
-        submit.setLocation(330, 350);
-        pre.setLocation(220, 350);
-        finish.setLocation(550,350);
+            equal.setLocation(360, 200);
+            answers.setLocation(410, 195);
+            subject.setLocation(110, 195);
+            next.setLocation(440, 350);
+            submit.setLocation(330, 350);
+            pre.setLocation(220, 350);
+            finish.setLocation(550,350);
 
-        panel.setLayout(null);
-        panel.add(answers);
-        panel.add(subject);
-        panel.add(equal);
-        panel.add(next);
-        panel.add(pre);
-        panel.add(submit);
-        panel.add(finish);
+            panel.setLayout(null);
+            panel.add(answers);
+            panel.add(subject);
+            panel.add(equal);
+            panel.add(next);
+            panel.add(pre);
+            panel.add(submit);
+            panel.add(finish);
+
+            flag = true;
+        }
+        else {
+            subject.setText("");
+            answers.setText("");
+            answers.setEnabled(true);
+        }
     }
 }
