@@ -88,7 +88,6 @@ public class ComputeFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Subject(board, item.getText());
-                initFrame();
             }
         });
     }
@@ -120,6 +119,7 @@ public class ComputeFrame {
     //提交事件
     private static void subjectSet(Subjects subjects) {
         String str = answers.getText();
+        System.out.println(str);
         Integer ans = null;
         try {
             ans = Integer.parseInt(str);
@@ -199,12 +199,13 @@ public class ComputeFrame {
             case "自定义": {
                 CustomDialog customDialog = new CustomDialog(computeFrame);
                 object = customDialog.getCode();
-                System.out.println(customDialog.getCode());
+                //System.out.println(customDialog.getCode());
                 subjectSet(object.getIntValue("level"),object.getIntValue("times"),object.getString("methor"),panel,subjects);
                 globle(panel);
                 panel.repaint();
             }
         }
+        initFrame();
     }
 
     private static void globle(JPanel panel) {
@@ -249,8 +250,6 @@ public class ComputeFrame {
         next.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(Record.getIndex());
-                System.out.println(Record.recordList.size());
                 //通过判断提交按钮的情况来确定是在浏览过往题目还是正常的点下一题
                 if(!submit.isEnabled()&&Record.getIndex().equals(Record.recordList.size()-1)) {
                     //将上一题的结果隐藏
