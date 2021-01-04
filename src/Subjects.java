@@ -11,6 +11,7 @@ public class Subjects {
 
     int level = 100;
     int methor = 4;
+    String banMes = null;
     Random r;
     String subject;
     Integer answer = null;
@@ -24,23 +25,32 @@ public class Subjects {
         ArrayList<Integer> numList = new ArrayList<>();
         ArrayList<String> signList = new ArrayList<>();
 
-        for (int i = 0; i < methor; i++) {
-            if (level == 0) {
-                int sign = r.nextInt(20)/10;
-                switch (sign){
-                    case 0:signList.add("+");break;
-                    case 1:signList.add("-");break;
-                }
-            }else {
-                int sign = r.nextInt(40)/10;
-                switch (sign){
-                    case 0:signList.add("+");break;
-                    case 1:signList.add("-");break;
-                    case 2:signList.add("*");break;
-                    case 3:signList.add("/");break;
+        if (banMes == null) {
+            for (int i = 0; i < methor; i++) {
+                if (level == 0) {
+                    int sign = r.nextInt(20)/10;
+                    switch (sign){
+                        case 0:signList.add("+");break;
+                        case 1:signList.add("-");break;
+                    }
+                }else {
+                    int sign = r.nextInt(40)/10;
+                    switch (sign){
+                        case 0:signList.add("+");break;
+                        case 1:signList.add("-");break;
+                        case 2:signList.add("*");break;
+                        case 3:signList.add("/");break;
+                    }
                 }
             }
+        }else {
+            for (int i = 0; i < methor; i++) {
+                int sign = r.nextInt(banMes.length()*10)/10;
+                System.out.println(String.valueOf(banMes.charAt(sign)));
+                signList.add(String.valueOf(banMes.charAt(sign)));
+            }
         }
+
 
         for (int i = 0; i < methor + 1; i++) {
             if(level == 0)
@@ -56,9 +66,9 @@ public class Subjects {
             subject += numList.get(i);
         }
 
-//        System.out.println(subject);
+        System.out.println(subject);
         answer = compute(subject);
-//        System.out.println(answer);
+        System.out.println(answer);
     }
 
     private int compute(String s){
@@ -77,8 +87,9 @@ public class Subjects {
             return subjects;
     }
 
-//    public static void main(String[] args) {
-//        Subjects subjects = Subjects.getInstance();
-//        subjects.subjects();
-//    }
+    public static void main(String[] args) {
+        Subjects subjects = Subjects.getInstance();
+        subjects.banMes = "+*";
+        subjects.subjects();
+    }
 }

@@ -107,6 +107,16 @@ public class ComputeFrame {
         panel.repaint();
     }
 
+    private static void subjectSet(int level, int methor,String banMessage, JPanel panel, Subjects subjects) {
+        globle(panel);
+        subjects.level = level;
+        subjects.methor = methor;
+        subjects.banMes = banMessage;
+        subjects.subjects();
+        subject.setText(subjects.subject);
+        panel.repaint();
+    }
+
     //提交事件
     private static void subjectSet(Subjects subjects) {
         String str = answers.getText();
@@ -188,7 +198,9 @@ public class ComputeFrame {
             break;
             case "自定义": {
                 CustomDialog customDialog = new CustomDialog(computeFrame);
+                object = customDialog.getCode();
                 System.out.println(customDialog.getCode());
+                subjectSet(object.getIntValue("level"),object.getIntValue("times"),object.getString("methor"),panel,subjects);
                 globle(panel);
                 panel.repaint();
             }
