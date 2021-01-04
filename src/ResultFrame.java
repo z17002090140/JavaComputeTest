@@ -45,7 +45,7 @@ public class ResultFrame {
                         obj[i][j]=number++;
                         break;
                     case 1:
-                        obj[i][j]=list.get(i).getContent()+list.get(i).getAns();
+                        obj[i][j]=list.get(i).getContent()+" = "+list.get(i).getAns();
                         break;
                     case 2:
                         if(list.get(i).getFlag()==1)
