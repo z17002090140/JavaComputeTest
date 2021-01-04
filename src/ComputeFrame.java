@@ -287,7 +287,7 @@ public class ComputeFrame {
                 next.setEnabled(false);
                 submit.setEnabled(false);
                 //调用结果窗口
-                new ResultFrame().showWindows();
+                new ResultFrame("结果").showWindows();
             }
         });
         equal.setFont(font);
