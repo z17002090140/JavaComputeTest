@@ -41,7 +41,7 @@ public class ComputeFrame {
         answers.setText("");
         //交卷按钮默认可用
         finish.setEnabled(true);
-
+        computeFrame.repaint();
     }
 
     public ComputeFrame() {
@@ -164,7 +164,7 @@ public class ComputeFrame {
             next.setEnabled(true);
 
             Record.add(record);
-            addRecord(recordDTO);
+//            addRecord(recordDTO);
         }else{
             hiddenLab.setText("请输入一个数字作答");
             hiddenLab.setVisible(true);
@@ -203,6 +203,7 @@ public class ComputeFrame {
     }
 
     private static void globle(JPanel panel) {
+        board.removeAll();
         Font font = new Font("Times New Roman", Font.BOLD, 30);
 
         JLabel equal = new JLabel("=");
