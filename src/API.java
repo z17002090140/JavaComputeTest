@@ -6,7 +6,8 @@ import java.util.Map;
 import java.util.zip.GZIPInputStream;
 
 public class API {
-    static String baseURL="http://localhost:8081/";
+    static String baseURL = "http://114.55.137.105:8099/";
+//    static String baseURL="http://localhost:8081/";
     //登陆接口
     static String LoginURL = baseURL+"user/login";
     //用户注册接口 username不可重复
