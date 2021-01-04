@@ -31,6 +31,24 @@ public class ComputeFrame {
         computeFrame.setVisible(true);
     }
 
+    //初始化事件 用于
+    public static void initFrame(){
+        //提示label默认不显示
+        hiddenLab.setVisible(false);
+        //上一题和下一题按钮默认不可用
+        pre.setEnabled(false);
+        next.setEnabled(false);
+        //提交按钮默认可用
+        submit.setEnabled(true);
+        //答案输入框默认可用
+        answers.setEnabled(true);
+        //答案输入框内容置空
+        answers.setText("");
+        //交卷按钮默认可用
+        finish.setEnabled(true);
+
+    }
+
     public ComputeFrame() {
         computeFrame = new JFrame("欢迎使用四则运算训练器，您当前的账户是：" + ID);
         JMenuBar menuBar = new JMenuBar();
@@ -70,6 +88,7 @@ public class ComputeFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Subject(board, item.getText());
+                initFrame();
             }
         });
     }
@@ -112,7 +131,7 @@ public class ComputeFrame {
             record.setContent(subjects.subject);
             record.setAns(answers.getText());
 
-            recordDTO.setContent(subjects.subject.toString()+" = "+answers.getText().toString());
+            recordDTO.setContent(subjects.subject+"="+answers.getText());
 
             if (!ans.equals(subjects.answer)) {
                 hiddenLab.setText("WrongAnswer 正确答案：" + subjects.answer);
@@ -138,6 +157,9 @@ public class ComputeFrame {
             //将上一题按钮置为可用
             pre.setEnabled(true);
             next.setEnabled(true);
+
+            Record.add(record);
+            addRecord(recordDTO);
         }else{
             hiddenLab.setText("请输入一个数字作答");
             hiddenLab.setVisible(true);
@@ -145,8 +167,6 @@ public class ComputeFrame {
             board.add(hiddenLab);
             board.repaint();
         }
-        Record.add(record);
-        addRecord(recordDTO);
     }
 
     //后端新增一条记录
@@ -200,10 +220,10 @@ public class ComputeFrame {
         pre.setSize(80, 30);
         submit.setSize(80, 30);
         finish.setSize(80,30);
-        hiddenLab.setVisible(false);
-        //上一题和下一题按钮默认不可用
-        pre.setEnabled(false);
-        next.setEnabled(false);
+//        hiddenLab.setVisible(false);
+//        //上一题和下一题按钮默认不可用
+//        pre.setEnabled(false);
+//        next.setEnabled(false);
 
         //给提交按钮添加事件
         submit.addActionListener(new ActionListener() {
