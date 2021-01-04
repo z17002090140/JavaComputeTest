@@ -2,6 +2,7 @@ package DTO;
 
 import java.util.Date;
 
+//用于接收后端的数据
 public class Response {
     String msg;
     IPage data;

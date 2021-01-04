@@ -5,11 +5,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+//计算界面的主体
 public class ComputeFrame {
     private static JFrame computeFrame;
+    //计算的式子
     private static JTextField subject;
+    //答案输入框
     private static JTextField answers;
+    //ID
     static String ID = "0";
     private static JPanel board;
     private static Subjects subjects;
@@ -26,11 +31,16 @@ public class ComputeFrame {
     //控件加载判断开关
     private static boolean flag = false;
 
+    /**
+     * 显示窗体
+     */
     public void showWindows() {
         computeFrame.setVisible(true);
     }
 
-    //初始化事件 用于
+    /**
+     * 初始化窗体 用于重新选择难度后一些控件的初始化
+     */
     public static void initFrame(){
         //提示label默认不显示
         hiddenLab.setVisible(false);
@@ -45,7 +55,10 @@ public class ComputeFrame {
         answers.setEnabled(true);
         //交卷按钮默认可用
         finish.setEnabled(true);
+
         board.repaint();
+        //记录数组初始化
+        //Record.initRecordList();
     }
 
     public ComputeFrame() {
@@ -93,11 +106,6 @@ public class ComputeFrame {
         });
     }
 
-    public static void main(String[] args) {
-        ComputeFrame a = new ComputeFrame();
-        a.showWindows();
-    }
-
     private static void subjectSet(int level, int methor, JPanel panel, Subjects subjects) {
         globle(panel);
         subjects.level = level;
@@ -141,9 +149,7 @@ public class ComputeFrame {
             //获取算式和输入的答案
             record.setContent(subjects.subject);
             record.setAns(answers.getText());
-
             recordDTO.setContent(subjects.subject+"="+answers.getText());
-
             if (!ans.equals(subjects.answer)) {
                 hiddenLab.setText("WrongAnswer 正确答案：" + subjects.answer);
                 hiddenLab.setVisible(true);
@@ -170,7 +176,7 @@ public class ComputeFrame {
             next.setEnabled(true);
 
             Record.add(record);
-//            addRecord(recordDTO);
+            addRecord(recordDTO);
         }else{
             hiddenLab.setText("请输入一个数字作答");
             hiddenLab.setVisible(true);
@@ -179,8 +185,10 @@ public class ComputeFrame {
             board.repaint();
         }
     }
-
-    //后端新增一条记录
+    /**
+     * 往后端新增一条记录
+     * @param recordDTO recordDTO对象
+     */
     private static void addRecord(RecordDTO recordDTO){
         API.doPost(API.AddRecord,"userId="+recordDTO.getUserId()+"&content="+recordDTO.getContent()+"&flag="+recordDTO.getFlag());
 
@@ -245,16 +253,21 @@ public class ComputeFrame {
                 }
             });
 
-            //给下一题按钮添加事件 刷新题目
+            /**
+             * 下一题按钮的事件
+             * 如果提交按钮为不可用状态并且记录数组的当前索引等于记录数组的总长度减1 进行下一个题目的渲染 否则的话认为是在浏览过往题目，进行的上下题切换
+             * 将记录数组的下标往下移 渲染题目
+             *
+             */
             next.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    //通过判断提交按钮的情况来确定是在浏览过往题目还是正常的点下一题
+
                     if(!submit.isEnabled()&&Record.getIndex().equals(Record.recordList.size()-1)) {
                         //将上一题的结果隐藏
                         hiddenLab.setVisible(false);
                         //设置答案框为可编辑状态 设置答案为空
-                        answers.setEditable(true);
+                        answers.setEnabled(true);
                         answers.setText("");
                         //启用提交按钮
                         submit.setEnabled(true);
@@ -262,7 +275,7 @@ public class ComputeFrame {
                         subjects.subjects();
                         subject.setText(subjects.subject);
                         board.repaint();
-                    }else{
+                    }else if(next.isEnabled()==!submit.isEnabled()){
                         try{
                             Record record = Record.getNext();
                             pre.setEnabled(true);
@@ -273,12 +286,18 @@ public class ComputeFrame {
                         }catch (Exception exception){
                             System.out.println("Error");
                         }
-
+                    }else if (submit.isEnabled()==next.isEnabled()){
+                        hiddenLab.setText("请先提交再点击下一题");
+                        hiddenLab.setVisible(true);
                     }
                 }
             });
 
-            //浏览上一题的事件
+            /**
+             * 上一题按钮的事件
+             * 如果提交不可用 则可以点击上一题按钮，如果记录的当前索引等于0 那么上一题按钮不可用 点击完上一题按钮后根据记录的下标
+             * 从记录的数组中读取对应的题目内容进行渲染
+             */
             pre.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -296,13 +315,19 @@ public class ComputeFrame {
                     }
                 }
             });
-            //交卷的事件
+
+            /**
+             * 交卷按钮的事件
+             * 将
+             */
             finish.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    subject.setText("");
-                    answers.setText("");
+                    //输入框不在可以编辑
+                    answers.setEnabled(false);
+                    subject.setEnabled(false);
                     hiddenLab.setVisible(false);
+
                     //将上一题，下一题，提交按钮置为不可用
                     pre.setEnabled(false);
                     next.setEnabled(false);
@@ -345,4 +370,10 @@ public class ComputeFrame {
             answers.setEnabled(true);
         }
     }
+
+    public static void main(String[] args) {
+        ComputeFrame a = new ComputeFrame();
+        a.showWindows();
+    }
+
 }

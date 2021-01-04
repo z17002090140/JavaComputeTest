@@ -1,7 +1,6 @@
 package DTO;
 
-import java.util.Date;
-
+//用于接受后端返回的数据
 public class RecordDTO {
     private Long ID;
 

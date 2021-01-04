@@ -1,13 +1,11 @@
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
-
 import javax.swing.*;
 import javax.swing.table.TableModel;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 //导出为Excel
 public class ExportExcel {
     JTable table;
@@ -23,7 +21,6 @@ public class ExportExcel {
             e.printStackTrace();
         }
     }
-
     public void export(){
         HSSFWorkbook wb = new HSSFWorkbook();
         HSSFSheet hs = wb.createSheet();
@@ -71,7 +68,6 @@ public class ExportExcel {
                         HSSFRichTextString srts = new HSSFRichTextString(value);
                         HSSFCell hc = hr.createCell((short) j);
                         hc.setCellStyle(style);
-
                         if (value.equals("") || value == null) {
                             hc.setCellValue(new HSSFRichTextString(""));
                         } else {
@@ -81,7 +77,6 @@ public class ExportExcel {
                 }
             }
         }
-
         try {
             wb.write(fos);
             fos.close();

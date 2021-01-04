@@ -10,7 +10,7 @@ public class Record {
 
     private Integer flag;
 
-    public Record(String content, String ans,String status, Integer flag) {
+    public Record(String content, String ans, String status, Integer flag) {
         this.content = content;
         this.ans = ans;
         this.status = status;
@@ -90,7 +90,7 @@ public class Record {
     }
 
     public static Record getNext() {
-        if (index < recordList.size()-1) {
+        if (index < recordList.size() - 1) {
             index++;
         }
         return recordList.get(index);
@@ -101,5 +101,10 @@ public class Record {
             index--;
         }
         return recordList.get(index);
+    }
+
+    public static void initRecordList() {
+        recordList = new ArrayList<>();
+        index = -1;
     }
 }

@@ -4,6 +4,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
+//表格内容
 public class RecordTableModel extends AbstractTableModel {
     private static final long serialVersionUID = 1L;
 
