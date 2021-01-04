@@ -22,11 +22,6 @@ public class ComputeFrame {
     private static JButton finish;
     public static JSONObject object;
 
-
-//    //上一题和下一题按钮的状态
-//    private static Boolean nextStatus = false;
-//    private static Boolean preStatus = false;
-
     public void showWindows() {
         computeFrame.setVisible(true);
     }
@@ -199,7 +194,6 @@ public class ComputeFrame {
             case "自定义": {
                 CustomDialog customDialog = new CustomDialog(computeFrame);
                 object = customDialog.getCode();
-                //System.out.println(customDialog.getCode());
                 subjectSet(object.getIntValue("level"),object.getIntValue("times"),object.getString("methor"),panel,subjects);
                 globle(panel);
                 panel.repaint();
@@ -233,10 +227,6 @@ public class ComputeFrame {
         pre.setSize(80, 30);
         submit.setSize(80, 30);
         finish.setSize(80,30);
-//        hiddenLab.setVisible(false);
-//        //上一题和下一题按钮默认不可用
-//        pre.setEnabled(false);
-//        next.setEnabled(false);
 
         //给提交按钮添加事件
         submit.addActionListener(new ActionListener() {

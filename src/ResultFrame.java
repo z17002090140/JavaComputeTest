@@ -101,9 +101,8 @@ public class ResultFrame {
                     exportExcel.export();
                 }
             });
-            resultPanel.add(save);
         }
-
+        resultPanel.add(save);
         computeResult.add(resultPanel);
     }
 
