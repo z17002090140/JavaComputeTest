@@ -48,7 +48,6 @@ public class API {
             os.write(param.getBytes());
             // 通过连接对象获取一个输入流，向远程读取
             if (connection.getResponseCode() == 200) {
-
                 is = connection.getInputStream();
                 // 对输入流对象进行包装:charset根据工作项目组的要求来设置
                 br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
@@ -90,7 +89,9 @@ public class API {
                 }
             }
             // 断开与远程地址url的连接
-            connection.disconnect();
+            if (connection != null) {
+                connection.disconnect();
+            }
         }
         return result;
     }
