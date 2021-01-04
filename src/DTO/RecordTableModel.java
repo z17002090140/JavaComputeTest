@@ -1,0 +1,46 @@
+package DTO;
+
+import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
+import java.util.List;
+
+public class RecordTableModel extends AbstractTableModel {
+    private static final long serialVersionUID = 1L;
+
+    private List<RecordDTO>recordDTOS = new ArrayList<RecordDTO>();
+
+    public void setRecordDTOS(List<RecordDTO> dtos){
+        this.recordDTOS = dtos;
+        this.fireTableDataChanged();
+    }
+    @Override
+    public int getRowCount() {
+        return recordDTOS.size();
+    }
+
+    @Override
+    public int getColumnCount() {
+        return 3;
+    }
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        Object obj = null;
+        RecordDTO recordDTO = recordDTOS.get(rowIndex);
+        switch (columnIndex) {
+            case 0:
+                obj= recordDTO.getContent();
+                break;
+            case 1:
+                if (recordDTO.getFlag() == 1)
+                    obj= "正确";
+                else
+                    obj= "错误";
+                break;
+            case 2:
+                obj= recordDTO.getCreateTime();
+                break;
+        }
+        return obj;
+    }
+}

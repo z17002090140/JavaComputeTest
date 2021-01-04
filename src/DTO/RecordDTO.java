@@ -1,5 +1,7 @@
 package DTO;
 
+import java.util.Date;
+
 public class RecordDTO {
     private Long ID;
 
@@ -8,6 +10,22 @@ public class RecordDTO {
     private String content;
 
     private Integer flag;
+
+    private String createTime;
+
+    private String updateTime;
+
+    public RecordDTO(Long ID, Long userId, String content, Integer flag, String createTime, String updateTime) {
+        this.ID = ID;
+        this.userId = userId;
+        this.content = content;
+        this.flag = flag;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
+
+    public RecordDTO() {
+    }
 
     public Long getID() {
         return ID;
@@ -41,14 +59,20 @@ public class RecordDTO {
         this.flag = flag;
     }
 
-    public RecordDTO(Long ID, Long userId, String content, Integer flag) {
-        this.ID = ID;
-        this.userId = userId;
-        this.content = content;
-        this.flag = flag;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public RecordDTO() {
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
     }
 
     @Override
@@ -58,6 +82,8 @@ public class RecordDTO {
                 ", userId=" + userId +
                 ", content='" + content + '\'' +
                 ", flag=" + flag +
+                ", createTime='" + createTime + '\'' +
+                ", updateTime='" + updateTime + '\'' +
                 '}';
     }
 }

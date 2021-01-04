@@ -2,9 +2,11 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Map;
+import java.util.zip.GZIPInputStream;
 
 public class API {
-    static String baseURL="http://localhost:8082/";
+    static String baseURL="http://10.62.174.148:8082/";
     //登陆接口
     static String LoginURL = baseURL+"user/login";
     //用户注册接口 username不可重复
@@ -16,7 +18,14 @@ public class API {
     //新增做题记录接口
     static String AddRecord=baseURL+"record/addRecord";
 
-    //POST方法
+    //方法
+
+    /**
+     * 用于向服务端发送http请求
+     * @param httpUrl 请求的接口
+     * @param param 请求带的参数
+     * @return 服务端返回的结果
+     */
     public static String doPost(String httpUrl, String param) {
         HttpURLConnection connection = null;
         InputStream is = null;
