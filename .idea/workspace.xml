@@ -44,12 +44,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2" />
-    <option name="y" value="43" />
-    <option name="width" value="1146" />
-    <option name="height" value="844" />
-  </component>
   <component name="ProjectId" id="1mY8Rqe3YFFKnsMjdw4zFrskG53" />
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
@@ -118,6 +112,7 @@
       <updated>1609659158275</updated>
       <workItem from="1609659160561" duration="3942000" />
       <workItem from="1609665151097" duration="17436000" />
+      <workItem from="1609719480029" duration="374000" />
     </task>
     <task id="LOCAL-00001" summary="Value Sout">
       <created>1609660432816</created>

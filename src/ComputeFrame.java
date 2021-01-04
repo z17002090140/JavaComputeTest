@@ -19,6 +19,7 @@ public class ComputeFrame {
     private static JButton next;
     private static JButton pre;
     public static JSONObject object;
+    private static JButton finish;
 
 //    //上一题和下一题按钮的状态
 //    private static Boolean nextStatus = false;
@@ -159,6 +160,8 @@ public class ComputeFrame {
 
         JLabel equal = new JLabel("=");
 
+        finish = new JButton("交卷");
+
         next = new JButton("下一题");
         pre = new JButton("上一题");
         submit = new JButton("提交");
@@ -176,6 +179,7 @@ public class ComputeFrame {
         next.setSize(80, 30);
         pre.setSize(80, 30);
         submit.setSize(80, 30);
+        finish.setSize(80,30);
         hiddenLab.setVisible(false);
         pre.setEnabled(false);
 
@@ -236,7 +240,18 @@ public class ComputeFrame {
                 }
             }
         });
-
+        //交卷的事件
+        finish.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //将上一题，下一题，提交按钮置为不可用
+                pre.setEnabled(false);
+                next.setEnabled(false);
+                submit.setEnabled(false);
+                //调用结果窗口
+                new ResultFrame().showWindows();
+            }
+        });
         equal.setFont(font);
         subject.setFont(font);
         answers.setFont(font);
@@ -248,6 +263,7 @@ public class ComputeFrame {
         next.setLocation(440, 350);
         submit.setLocation(330, 350);
         pre.setLocation(220, 350);
+        finish.setLocation(550,350);
 
         panel.setLayout(null);
         panel.add(answers);
@@ -256,5 +272,6 @@ public class ComputeFrame {
         panel.add(next);
         panel.add(pre);
         panel.add(submit);
+        panel.add(finish);
     }
 }
