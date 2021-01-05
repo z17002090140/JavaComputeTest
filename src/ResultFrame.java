@@ -3,6 +3,8 @@ import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.List;
 import java.util.Objects;
@@ -19,7 +21,7 @@ public class ResultFrame {
     //表头
     public static String name = "结果";
     //标题
-    private static String[] columnNames={"编号","内容","结果"};
+    private static final String[] columnNames={"编号","内容","结果"};
     //编号
     private static Integer number = 1;
 
@@ -96,30 +98,29 @@ public class ResultFrame {
                     }
                     //文件名通过uuid生成
                     String  uuid = UUID.randomUUID().toString().replace("-","");
-                    String path = file.getPath()+"\\"+uuid+".xls";
-                    ExportExcel exportExcel = new ExportExcel(table,path);
-                    exportExcel.export();
+                    if(file!=null){
+                        String path = file.getPath() + "\\" + uuid + ".xls";
+                        ExportExcel exportExcel = new ExportExcel(table, path);
+                        exportExcel.export();
+                    }
                 }
             });
         }
         resultPanel.add(save);
         computeResult.add(resultPanel);
+
+        computeResult.addWindowListener(new WindowAdapter() {
+            //窗体点击关闭时，要做的事
+            @Override
+            public void windowClosing(WindowEvent e) {
+                //结束程序
+                computeResult.dispose();
+            }
+        });
     }
 
     public void showWindows(){
         computeResult.setVisible(true);
-    }
-
-    public static JFrame getComputeResult() {
-        return computeResult;
-    }
-
-    public static JTable getTable() {
-        return table;
-    }
-
-    public static JButton getSave() {
-        return save;
     }
 
     public static void main(String[] args) {

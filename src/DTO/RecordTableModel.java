@@ -8,6 +8,12 @@ import java.util.List;
 public class RecordTableModel extends AbstractTableModel {
     private static final long serialVersionUID = 1L;
 
+    private String[] title;
+
+    public RecordTableModel(String[] title) {
+        this.title = title;
+    }
+
     private List<RecordDTO>recordDTOS = new ArrayList<RecordDTO>();
 
     public void setRecordDTOS(List<RecordDTO> dtos){
@@ -44,4 +50,7 @@ public class RecordTableModel extends AbstractTableModel {
         }
         return obj;
     }
+
+    public String getColumnName(int column){
+        return title[column];}
 }

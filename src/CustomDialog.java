@@ -5,6 +5,8 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class CustomDialog {
     private static JLabel methor = new JLabel("符号:");
@@ -90,16 +92,13 @@ public class CustomDialog {
         addActionListener(submit);
 
         customFrame.setVisible(true);
+
     }
 
     private static void addActionListener(JButton button){
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                System.out.println(levelsValue.getText().matches("[1-9]\\d+"));
-//                System.out.println(timesValue.getText().matches("[1-9]\\d*"));
-//                System.out.println(addMethor.isSelected() || subMethor.isSelected() ||
-//                        mulMethor.isSelected() || divMethor.isSelected());
                 if (levelsValue.getText().matches("[1-9]\\d+") && timesValue.getText().matches("[1-9]\\d*") && (
                         addMethor.isSelected() || subMethor.isSelected() ||
                         mulMethor.isSelected() || divMethor.isSelected()

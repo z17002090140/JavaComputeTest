@@ -10,6 +10,8 @@ import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.*;
 import java.util.List;
@@ -18,7 +20,10 @@ import java.util.List;
 public class SearchFrame {
     private static JFrame thisFrame;
     private static JScrollPane scroll;
-    static final RecordTableModel recordTableModel = new RecordTableModel();
+    //标题
+    private static final String[] columnNames = {"内容", "结果", "完成时间"};
+
+    static final RecordTableModel recordTableModel = new RecordTableModel(columnNames);
     private static JPanel resultPanel;
     //上一页
     private static JButton nextPage = new JButton("下一页");
@@ -29,13 +34,12 @@ public class SearchFrame {
     //默认分页参数
     private static Integer current = 1;
     private static Integer size = 10;
-    private static Integer total=null;
-    private static Integer pages=null;
-    //标题
-    private static String[] columnNames = {"内容", "结果", "完成时间"};
+    private static Integer total = null;
+    private static Integer pages = null;
+
 
     //用于界面的渲染用
-    private static JTable thisTable=new JTable();
+    private static JTable thisTable = new JTable();
     //用于导出时使用，导出所有数据，所以不能分页进行导出，要重新加载一个table
     private static JTable ExcelTable;
     private JButton save;
@@ -56,9 +60,11 @@ public class SearchFrame {
         List<RecordDTO> recordDTOS = getRecordByUserId().getRecords();
 
         changeCurrent(recordDTOS);
+
         scroll = new JScrollPane(thisTable);
         scroll.setSize(600, 400);
         scroll.setLocation(90, 30);
+
         thisFrame.add(scroll);
 
         nextPage.setSize(100, 30);
@@ -96,18 +102,20 @@ public class SearchFrame {
                 }
                 //文件名通过uuid生成
                 String uuid = UUID.randomUUID().toString().replace("-", "");
-                String path = file.getPath() + "\\" + uuid + ".xls";
-                ExportExcel exportExcel = new ExportExcel(ExcelTable, path);
-                exportExcel.export();
+                if (file != null) {
+                    String path = file.getPath() + "\\" + uuid + ".xls";
+                    ExportExcel exportExcel = new ExportExcel(ExcelTable, path);
+                    exportExcel.export();
+                }
             }
         });
 
         nextPage.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(current.equals(pages)||current.compareTo(pages)>0){
+                if (current.equals(pages) || current.compareTo(pages) > 0) {
                     System.out.println("最后一页了");
-                }else{
+                } else {
                     current++;
                     IPage page = getRecordByUserId();
                     changeCurrent(page.getRecords());
@@ -118,9 +126,9 @@ public class SearchFrame {
         prePage.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(current.equals(1)||current.compareTo(1)<0){
+                if (current.equals(1) || current.compareTo(1) < 0) {
                     System.out.println("已经第一页了");
-                }else{
+                } else {
                     current--;
                     IPage page = getRecordByUserId();
                     changeCurrent(page.getRecords());
@@ -137,11 +145,20 @@ public class SearchFrame {
                 changeCurrent(page.getRecords());
             }
         });
+
+        thisFrame.addWindowListener(new WindowAdapter() {
+            //窗体点击关闭时，要做的事
+            @Override
+            public void windowClosing(WindowEvent e) {
+                //结束程序
+                thisFrame.dispose();
+            }
+        });
     }
 
     //生成一个JTable用来导出全部数据到excel用
-    public static void getTable(List<RecordDTO>recordDTOS){
-        List<RecordDTO>list = recordDTOS;
+    public static void getTable(List<RecordDTO> recordDTOS) {
+        List<RecordDTO> list = recordDTOS;
         //生成JTable
         int len = list.size();
         Object[][] obj = new Object[len][3];
@@ -163,20 +180,20 @@ public class SearchFrame {
                 }
             }
         }
-        ExcelTable = new JTable(obj,columnNames);
-        ExcelTable.setSize(600,450);
-        ExcelTable.setPreferredScrollableViewportSize(new Dimension(600,450));
+        ExcelTable = new JTable(obj, columnNames);
+        ExcelTable.setSize(600, 450);
+        ExcelTable.setPreferredScrollableViewportSize(new Dimension(600, 450));
         ExcelTable.setEnabled(false);
         TableColumn column = null;
-        int colunms = ExcelTable.getColumnCount();
-        for(int i=0;i<colunms;i++){
+        int columns = ExcelTable.getColumnCount();
+        for (int i = 0; i < columns; i++) {
             column = ExcelTable.getColumnModel().getColumn(i);
             column.setPreferredWidth(200);
         }
         ExcelTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
     }
 
-    public static void changeCurrent(List<RecordDTO>recordDTOS){
+    public static void changeCurrent(List<RecordDTO> recordDTOS) {
         recordTableModel.setRecordDTOS(recordDTOS);
         thisTable.setModel(recordTableModel);
     }
@@ -188,16 +205,16 @@ public class SearchFrame {
         IPage page = JSONObject.parseObject(res, Response.class).getData();
         System.out.println(page.getTotal());
         total = page.getTotal();
-        pages=page.getPages();
+        pages = page.getPages();
         return page;
     }
 
-    public static  List<RecordDTO> getAllRecords(){
+    public static List<RecordDTO> getAllRecords() {
         String userId = ComputeFrame.ID;
         String res = API.doPost(API.FindAllRecord, "userId=" + userId);
         System.out.println(res);
         JSONObject obj = JSONObject.parseObject(res);
-        List<RecordDTO>recordDTOS = JSONArray.parseArray(obj.get("data").toString(),RecordDTO.class);
+        List<RecordDTO> recordDTOS = JSONArray.parseArray(obj.get("data").toString(), RecordDTO.class);
         return recordDTOS;
     }
 
@@ -205,7 +222,10 @@ public class SearchFrame {
         thisFrame.setVisible(true);
     }
 
+
     public static void main(String[] args) {
-        new SearchFrame().showWindows();
+        SearchFrame searchFrame = new SearchFrame();
+        searchFrame.showWindows();
     }
+
 }

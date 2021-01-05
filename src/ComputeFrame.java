@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 //计算界面的主体
@@ -108,6 +110,15 @@ public class ComputeFrame {
         menuBar.add(result);
         computeFrame.add(menuBar);
         computeFrame.add(board);
+
+        computeFrame.addWindowListener(new WindowAdapter() {
+            //窗体点击关闭时，要做的事
+            @Override
+            public void windowClosing(WindowEvent e) {
+                //结束程序
+                System.exit(0);
+            }
+        });
     }
 
     private static void addActionListener(JMenuItem item) {
