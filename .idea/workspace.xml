@@ -26,18 +26,13 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8630c72a-c587-46d8-87e6-60438d1381ac" name="Default Changelist" comment="部署了后端服务器 修改了API接口指向的地址">
+    <list default="true" id="8630c72a-c587-46d8-87e6-60438d1381ac" name="Default Changelist" comment="BugS v0.3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/JavaComputeTest/ComputeFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JavaComputeTest/ComputeFrame$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/JavaComputeTest/ComputeFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JavaComputeTest/ComputeFrame.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/JavaComputeTest/LoginFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JavaComputeTest/LoginFrame$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/JavaComputeTest/LoginFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JavaComputeTest/LoginFrame.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ComputeFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ComputeFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CustomDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CustomDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTO/RecordTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/RecordTableModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LoginFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ResultFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ResultFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SearchFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SearchFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,8 +40,81 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DefaultGradleProjectSettings">
-    <option name="testRunner" value="GRADLE" />
-    <option name="delegatedBuild" value="true" />
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ComputeFrame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1511">
+              <caret line="249" column="32" lean-forward="true" selection-start-line="249" selection-start-column="32" selection-end-line="249" selection-end-column="32" />
+              <folding>
+                <element signature="e#965#966#0" expanded="true" />
+                <element signature="e#1010#1011#0" expanded="true" />
+                <element signature="e#3148#3352#0" expanded="true" />
+                <element signature="e#3351#3352#0" expanded="true" />
+                <element signature="e#8297#8298#0" expanded="true" />
+                <element signature="e#8357#8358#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/LoginFrame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1767">
+              <caret line="109" column="37" selection-start-line="109" selection-start-column="37" selection-end-line="109" selection-end-column="37" />
+              <folding>
+                <element signature="e#4234#4235#0" expanded="true" />
+                <element signature="e#4280#4281#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/SearchFrame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3781">
+              <caret line="211" column="51" selection-start-line="211" selection-start-column="51" selection-end-line="211" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/API.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="19" column="55" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/DTO/RecordDTO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="133">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/CustomDialog.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-693">
+              <caret line="29" column="11" selection-start-line="29" selection-start-column="11" selection-end-line="29" selection-end-column="11" />
+              <folding>
+                <element signature="e#4689#4690#0" expanded="true" />
+                <element signature="e#4716#4717#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -58,7 +126,44 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/ComputeFrame.java" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectId" id="1mY8Rqe3YFFKnsMjdw4zFrskG53" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="false" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="JavaComputeTest" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JavaComputeTest" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="JavaComputeTest" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JavaComputeTest" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="JavaComputeTest" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JavaComputeTest" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
@@ -85,7 +190,19 @@
       <recent name="E:\Study\JavaComputeTest\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.LoginFrame">
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.ComputeFrame">
     <configuration name="ComputeFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ComputeFrame" />
       <module name="JavaComputeTest" />
@@ -123,10 +240,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ComputeFrame" />
         <item itemvalue="Application.LoginFrame" />
         <item itemvalue="Application.SearchFrame" />
         <item itemvalue="Application.ResultFrame" />
-        <item itemvalue="Application.ComputeFrame" />
         <item itemvalue="Application.Subjects" />
       </list>
     </recent_temporary>
@@ -242,8 +359,47 @@
     <option name="localTasksCounter" value="13" />
     <servers />
   </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1230000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" x="493" y="303" width="265" height="406" id="Project" order="0" visible="true" weight="0.14285715" />
+      <window_info id="设计器" order="1" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Capture Tool" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22776572" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32957748" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.32957748" />
+      <window_info anchor="bottom" id="调试" order="13" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info anchor="right" id="Maven" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info anchor="right" id="调色板" order="7" />
+      <window_info anchor="right" id="Database" order="8" />
+      <window_info anchor="right" id="Structure" order="9" visible="true" weight="0.1444563" />
+    </layout>
+  </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ORDER">
@@ -261,6 +417,12 @@
         <entry key="MAIN">
           <value>
             <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
               <option name="FILTERS">
                 <map>
                   <entry key="branch">
@@ -291,7 +453,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Value Sout" />
@@ -456,5 +617,52 @@
         <watch expression="input" />
       </configuration>
     </watches-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/out/production/JavaComputeTest/ComputeFrame.class">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DTO/RecordDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/JavaComputeTest/ExpressionToDouble.class">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/JavaComputeTest/CustomDialog.class">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/JavaComputeTest/ExportExcel.class">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CustomDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-693">
+          <caret line="29" column="11" selection-start-line="29" selection-start-column="11" selection-end-line="29" selection-end-column="11" />
+          <folding>
+            <element signature="e#4689#4690#0" expanded="true" />
+            <element signature="e#4716#4717#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ComputeFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1511">
+          <caret line="249" column="32" lean-forward="true" selection-start-line="249" selection-start-column="32" selection-end-line="249" selection-end-column="32" />
+          <folding>
+            <element signature="e#965#966#0" expanded="true" />
+            <element signature="e#1010#1011#0" expanded="true" />
+            <element signature="e#3148#3352#0" expanded="true" />
+            <element signature="e#3351#3352#0" expanded="true" />
+            <element signature="e#8297#8298#0" expanded="true" />
+            <element signature="e#8357#8358#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>
