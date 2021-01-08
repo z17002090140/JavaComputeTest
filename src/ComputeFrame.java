@@ -33,6 +33,7 @@ public class ComputeFrame {
 
     //控件加载判断开关
     private static boolean flag = false;
+    private static boolean key = true;
 
     /**
      * 显示窗体
@@ -44,7 +45,7 @@ public class ComputeFrame {
     /**
      * 初始化窗体 用于重新选择难度后一些控件的初始化
      */
-    public static void initFrame(){
+    public static void initFrame() throws NullPointerException{
         //提示label默认不显示
         hiddenLab.setVisible(false);
         //上一题和下一题按钮默认不可用
@@ -125,9 +126,13 @@ public class ComputeFrame {
         item.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                diff.setText(diff.getText() + "  " + item.getText());
+                diff.setText("难度:  " + item.getText());
                 Subject(board, item.getText());
-                diff.setEnabled(false);
+                if (key) {
+                    diff.setEnabled(false);
+                }else {
+                    key = true;
+                }
             }
         });
     }
@@ -226,21 +231,26 @@ public class ComputeFrame {
         switch (type) {
             case "幼  儿": {
                 subjectSet(0, 1, panel, subjects);
+                initFrame();
             }
             break;
             case "小学生": {
                 subjectSet(100, 2, panel, subjects);
+                initFrame();
             }
             break;
             case "自定义": {
                 CustomDialog customDialog = new CustomDialog(computeFrame);
-                object = customDialog.getCode();
-                subjectSet(object.getIntValue("level"),object.getIntValue("times"),object.getString("methor"),panel,subjects);
-//                globle(panel);
-                panel.repaint();
+                if (!customDialog.getCode().isEmpty()){
+                    object = customDialog.getCode();
+                    subjectSet(object.getIntValue("level"),object.getIntValue("times"),object.getString("methor"),panel,subjects);
+                    panel.repaint();
+                    initFrame();
+                }else{
+                    key = false;
+                }
             }
         }
-        initFrame();
     }
 
     private static void globle(JPanel panel) {
