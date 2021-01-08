@@ -16,7 +16,9 @@ import java.io.File;
 import java.util.*;
 import java.util.List;
 
-//查询界面 分页查询
+/**
+ * 查询历史界面 分页查询（15行）
+ */
 public class SearchFrame {
     private static JFrame thisFrame;
     private static JScrollPane scroll;
@@ -44,6 +46,9 @@ public class SearchFrame {
     private static JTable ExcelTable;
     private JButton save;
 
+    /**
+     * 查询页面样式
+     */
     public SearchFrame() {
         thisFrame = new JFrame("查询");
         save = new JButton("保存");
@@ -82,6 +87,9 @@ public class SearchFrame {
         thisFrame.add(refresh);
         thisFrame.add(save);
 
+        /**
+         * 对查询历史按钮进行监听
+         */
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -122,7 +130,9 @@ public class SearchFrame {
                 }
             }
         });
-
+        /**
+         * 上一题按钮的事件
+         */
         prePage.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -136,6 +146,9 @@ public class SearchFrame {
             }
         });
 
+        /**
+         * 下一题按钮的事件
+         */
         refresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -193,11 +206,19 @@ public class SearchFrame {
         ExcelTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
     }
 
+    /**
+     * 页面发生改变，调用后端数据
+     * @param recordDTOS
+     */
     public static void changeCurrent(List<RecordDTO> recordDTOS) {
         recordTableModel.setRecordDTOS(recordDTOS);
         thisTable.setModel(recordTableModel);
     }
 
+    /**
+     * 通过用户名ID来获取后端相应数据
+     * @return
+     */
     public static IPage getRecordByUserId() {
         String userId = ComputeFrame.ID;
         String res = API.doPost(API.FindRecordByUserId, "userId=" + userId + "&current=" + current + "&size=" + size);
@@ -209,6 +230,11 @@ public class SearchFrame {
         return page;
     }
 
+    /**
+     *
+     * 后端未分页数据
+     * @return
+     */
     public static List<RecordDTO> getAllRecords() {
         String userId = ComputeFrame.ID;
         String res = API.doPost(API.FindAllRecord, "userId=" + userId);
@@ -218,6 +244,9 @@ public class SearchFrame {
         return recordDTOS;
     }
 
+    /**
+     * 使窗体可视化
+     */
     public void showWindows() {
         thisFrame.setVisible(true);
     }

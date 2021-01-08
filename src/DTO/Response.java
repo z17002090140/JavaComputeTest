@@ -2,7 +2,10 @@ package DTO;
 
 import java.util.Date;
 
-//用于接收后端的数据
+/**
+ * 用于接收后端的数据
+ */
+
 public class Response {
     String msg;
     IPage data;
@@ -41,6 +44,13 @@ public class Response {
         this.responseCode = responseCode;
     }
 
+    /**
+     * 接受后端返回的数据
+     * @param msg
+     * @param data
+     * @param serverTime
+     * @param responseCode
+     */
     public Response(String msg, IPage data, Date serverTime, Integer responseCode) {
         this.msg = msg;
         this.data = data;
@@ -48,6 +58,10 @@ public class Response {
         this.responseCode = responseCode;
     }
 
+    /**
+     * tostring方法
+     * @return
+     */
     @Override
     public String toString() {
         return "Response{" +

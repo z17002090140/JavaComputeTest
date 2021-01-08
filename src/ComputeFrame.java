@@ -9,7 +9,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
-//计算界面的主体
+/**
+ * 计算界面的主体及其控件
+ */
 public class ComputeFrame {
     private static JFrame computeFrame;
     //计算的式子
@@ -156,7 +158,9 @@ public class ComputeFrame {
         panel.repaint();
     }
 
-    //提交事件
+    /**
+     *提交事件
+     */
     private static void subjectSet(Subjects subjects) {
         String str = answers.getText();
         System.out.println(str);
@@ -221,6 +225,7 @@ public class ComputeFrame {
      * @param recordDTO recordDTO对象
      */
     private static void addRecord(RecordDTO recordDTO){
+
         API.doPost(API.AddRecord,"userId="+recordDTO.getUserId()+"&content="+recordDTO.getContent()+"&flag="+recordDTO.getFlag());
 
     }
@@ -369,7 +374,7 @@ public class ComputeFrame {
                     next.setEnabled(false);
                     submit.setEnabled(false);
                     //调用结果窗口
-                    new ResultFrame("结果").showWindows();
+                    new ResultFrame().showWindows();
                     //允许新游戏开始
                     diff.setText("难度:");
                     diff.setEnabled(true);

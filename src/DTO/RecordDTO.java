@@ -1,6 +1,7 @@
 package DTO;
-
-//用于接受后端返回的数据
+/**
+ * 用于接受后端返回的数据
+ */
 public class RecordDTO {
     private Long ID;
 
@@ -74,6 +75,10 @@ public class RecordDTO {
         this.updateTime = updateTime;
     }
 
+    /**
+     * tostring方法
+     * @return
+     */
     @Override
     public String toString() {
         return "RecordDTO{" +

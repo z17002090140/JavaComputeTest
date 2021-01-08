@@ -4,9 +4,12 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
-//表格内容
+/**
+ * 历史表格内容
+ */
 public class RecordTableModel extends AbstractTableModel {
-    private static final long serialVersionUID = 1L;
+
+    private static final long serialVersionUID = 1L;//保持对象的唯一性
 
     private String[] title;
 
@@ -17,8 +20,8 @@ public class RecordTableModel extends AbstractTableModel {
     private List<RecordDTO>recordDTOS = new ArrayList<RecordDTO>();
 
     public void setRecordDTOS(List<RecordDTO> dtos){
-        this.recordDTOS = dtos;
         this.fireTableDataChanged();
+        this.recordDTOS = dtos;
     }
     @Override
     public int getRowCount() {

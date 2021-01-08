@@ -1,10 +1,12 @@
 package DTO;
-
 import java.util.Arrays;
 import java.util.List;
 
-//用于接受后端传过来的记录
+/**
+ * 用于接受后端传过来的记录
+ */
 public class IPage {
+
     private Integer current;
     private Integer total;
     private Boolean hitCount;
@@ -18,9 +20,14 @@ public class IPage {
         return current;
     }
 
+    /**
+     *分页参数
+     * @param current
+     */
     public void setCurrent(Integer current) {
         this.current = current;
     }
+
 
     public Integer getTotal() {
         return total;
@@ -90,6 +97,7 @@ public class IPage {
     }
 
     public IPage() {
+
     }
 
     @Override
