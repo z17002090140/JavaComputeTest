@@ -17,7 +17,7 @@ public class ResultFrame {
     //标签
     private static JLabel label = new JLabel("讲骚话");
     //保存到本地的按钮
-    private static JButton save = new JButton("保存");
+    private JButton save = new JButton("保存");
     //表头
     public static String name = "结果";
     //标题
