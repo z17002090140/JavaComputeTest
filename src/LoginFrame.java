@@ -7,6 +7,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+/**
+ * 登录界面及注册界面
+ */
 public class LoginFrame {
 
     private static JFrame computeLogin;
@@ -32,6 +35,12 @@ public class LoginFrame {
         signin.setBackground(new Color(238, 238, 238));
         signin.setSize(60,20);
         signin.setLocation(110,190);
+        /**
+         * 注册按钮点击事件
+         *
+         *  利用一个ActionListener来监听事件源产生的事件（用户名及密码格式）
+         *  用一些if语句来决定是哪个事件源（判断用户名和密码是否符合格式要求）
+         */
         signin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -100,6 +109,11 @@ public class LoginFrame {
         });
     }
 
+    /**
+     * 登录成功后进入程序
+     * @param user
+     * @param pwd
+     */
     private static void Action(String user, String pwd) {
         String get = API.doPost(API.LoginURL,"username="+user+"&password="+pwd);
         JSONObject strJSON = JSONObject.parseObject(get);
@@ -120,6 +134,10 @@ public class LoginFrame {
 
     private static ActionListener action;
 
+    /**
+     * 登录按钮点击事件
+     * @param button
+     */
     private static void addActionListener(JButton button){
          action = new ActionListener() {
             @Override

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * 随机生成数字和表达式以及计算方法
+ */
 public class Subjects {
 
     private static Subjects subjects = null;
@@ -78,6 +81,10 @@ public class Subjects {
         return value;
     }
 
+    /**
+     * 生成表达式
+     * @return
+     */
     public static Subjects getInstance(){
         if (subjects == null) {
             long randomNum = System.currentTimeMillis();

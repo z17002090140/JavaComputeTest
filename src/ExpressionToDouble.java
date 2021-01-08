@@ -1,5 +1,8 @@
 import java.util.Stack;
 
+/**
+ * 将string的运算字符转化为可以惊醒实际运算的方法（即实现加减乘除，先乘除后加减）
+ */
 public class ExpressionToDouble {
     private static boolean isNumber(char ch){
         return ch == '.' || (ch >= '0' && ch <= '9');
