@@ -36,6 +36,8 @@ public class LoginFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 submit.setText("注册");
+                username.setText("");
+                password.setText("");
                 loginPanel.remove(signin);
 
                 submit.removeActionListener(action);
@@ -44,7 +46,7 @@ public class LoginFrame {
                     public void actionPerformed(ActionEvent e) {
                         String user = username.getText();
                         String pwd  = password.getText();
-                        if (user.length() > 0 && pwd.length() > 6) {
+                        if (user.length() > 5 && pwd.length() > 5) {
                             API.doPost(API.AddUser,"username="+user+"&password="+pwd);
                             Action(user, pwd);
                         }else {

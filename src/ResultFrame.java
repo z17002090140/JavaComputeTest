@@ -90,6 +90,7 @@ public class ResultFrame {
                     Integer flag=null;
                     try{
                         flag = chooser.showOpenDialog(null);
+                        System.out.println(flag);
                     }catch (Exception e1){
                         System.out.println("Error");
                     }
