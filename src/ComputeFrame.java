@@ -359,7 +359,7 @@ public class ComputeFrame {
                     next.setEnabled(false);
                     submit.setEnabled(false);
                     //调用结果窗口
-                    new ResultFrame("结果").showWindows();
+                    new ResultFrame().showWindows();
                     //允许新游戏开始
                     diff.setText("难度:");
                     diff.setEnabled(true);
