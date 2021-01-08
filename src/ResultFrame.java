@@ -10,13 +10,17 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ *显示答案窗口
+ */
 public class ResultFrame {
+    //主体
     private static JFrame computeResult;
+    //文件选择框
+    private static JFileChooser chooser;
     //表格
     private static JTable table;
     //标签
-    private static JLabel label = new JLabel("讲骚话");
-    //保存到本地的按钮
     private JButton save = new JButton("保存");
     //表头
     public static String name = "结果";
@@ -24,9 +28,12 @@ public class ResultFrame {
     private static final String[] columnNames = {"编号", "内容", "结果"};
     //编号
     private static Integer number = 1;
-    //文件选择框
-    private static JFileChooser chooser;
-    public ResultFrame() {
+
+    /**
+     *
+     */
+    public ResultFrame(){
+
         computeResult = new JFrame(name);
         JPanel resultPanel = new JPanel();
         resultPanel.setSize(800, 600);
@@ -36,8 +43,8 @@ public class ResultFrame {
         computeResult.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - 800) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - 600) / 2);
         computeResult.setLayout(null);
         resultPanel.setLayout(null);
+        List<Record>list = Record.getRecordList();
 
-        List<Record> list = Record.getRecordList();
         //生成JTable
         int len = list.size();
         Object[][] obj = new Object[len][3];
@@ -121,6 +128,7 @@ public class ResultFrame {
 
     public void showWindows() {
         computeResult.setVisible(true);
+
     }
 
     public static void main(String[] args) {

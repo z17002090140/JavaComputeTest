@@ -8,8 +8,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 //导出为Excel
 public class ExportExcel {
+    /**
+     *通过resource文件夹中POI外部依赖来生成excel（字体、边框、背景色、居中）
+     */
     JTable table;
     FileOutputStream fos;
+
+    /**
+     * 导出的数据和路径
+     * @param table
+     * @param path
+     */
 
     public ExportExcel(JTable table,String path){
         this.table = table;
@@ -22,6 +31,7 @@ public class ExportExcel {
         }
     }
     public void export(){
+
         HSSFWorkbook wb = new HSSFWorkbook();
         HSSFSheet hs = wb.createSheet();
         hs.setDefaultColumnWidth(20);
@@ -29,21 +39,25 @@ public class ExportExcel {
         int row = tm.getRowCount();
         int column = tm.getColumnCount();
         HSSFCellStyle style = wb.createCellStyle();
+
         style.setBorderBottom(HSSFCellStyle.BORDER_THIN);
         style.setBorderLeft(HSSFCellStyle.BORDER_THIN);
         style.setBorderRight(HSSFCellStyle.BORDER_THIN);
         style.setBorderTop(HSSFCellStyle.BORDER_THIN);
+
         style.setFillForegroundColor(HSSFColor.LIGHT_GREEN.index);
         style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
         HSSFFont font = wb.createFont();
         font.setFontHeightInPoints((short) 11);
         style.setFont(font);
         HSSFCellStyle style1 = wb.createCellStyle();
+
         style1.setBorderBottom(HSSFCellStyle.BORDER_THIN);
         style1.setBorderLeft(HSSFCellStyle.BORDER_THIN);
         style1.setBorderRight(HSSFCellStyle.BORDER_THIN);
         style1.setBorderTop(HSSFCellStyle.BORDER_THIN);
-        style1.setFillForegroundColor(HSSFColor.ORANGE.index);
+
+        style1.setFillForegroundColor(HSSFColor.ORANGE.index);//设置导出excel表格背景色
         style1.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
         HSSFFont font1 = wb.createFont();
         font1.setFontHeightInPoints((short) 15);
@@ -56,10 +70,8 @@ public class ExportExcel {
                 if (i == 0) {
                     String value = tm.getColumnName(j);
                     int len = value.length();
-//                    hs.setColumnWidth((short) j, (short) (len * 400));
                     HSSFRichTextString srts = new HSSFRichTextString(value);
-                    HSSFCell hc = hr.createCell((short) j);
-                    //hc.setEncoding((short) 1);
+                    HSSFCell hc = hr.createCell((short) j);//已过期的方法
                     hc.setCellStyle(style1);
                     hc.setCellValue(srts);
                 } else {

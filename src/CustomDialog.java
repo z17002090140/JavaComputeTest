@@ -12,7 +12,6 @@ public class CustomDialog {
     private static JLabel methor = new JLabel("符号:");
     private static JLabel times = new JLabel("次数:");
     private static JLabel levels = new JLabel("范围:");
-
     private static JPanel methorList = new JPanel();
     private static JTextField timesValue = new JTextField();
     private static JTextField levelsValue = new JTextField();
@@ -21,9 +20,7 @@ public class CustomDialog {
     private static JCheckBox mulMethor = new JCheckBox("*");
     private static JCheckBox divMethor = new JCheckBox("/");
     private static JButton submit = new JButton("提交");
-
     private static JDialog customFrame;
-
     private static JSONObject code = new JSONObject();
     private static JFrame father;
 
