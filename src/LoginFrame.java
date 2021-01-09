@@ -112,9 +112,9 @@ public class LoginFrame {
     }
 
     /**
-     * 登录成功后进入程序
-     * @param user
-     * @param pwd
+     * 登录成功后进入程序 如果返回的是信息是成功 则进入系统
+     * @param user 用户名
+     * @param pwd 密码
      */
     private static void Action(String user, String pwd) {
         String get = API.doPost(API.LoginURL,"username="+user+"&password="+pwd);

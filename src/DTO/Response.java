@@ -7,9 +7,13 @@ import java.util.Date;
  */
 
 public class Response {
+    //后端返回的信息
     String msg;
+    //后端返回的具体内容
     IPage data;
+    //服务器时间
     Date serverTime;
+    //返回码
     Integer responseCode;
 
     public String getMsg() {
@@ -58,10 +62,6 @@ public class Response {
         this.responseCode = responseCode;
     }
 
-    /**
-     * tostring方法
-     * @return
-     */
     @Override
     public String toString() {
         return "Response{" +

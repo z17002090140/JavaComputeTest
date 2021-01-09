@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 历史表格内容
+ * 用于装填表格内容
  */
 public class RecordTableModel extends AbstractTableModel {
 
-    private static final long serialVersionUID = 1L;//保持对象的唯一性
+    private static final long serialVersionUID = 1L;
 
     private String[] title;
 

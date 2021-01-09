@@ -7,10 +7,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-/*
-* 自定义难度的实现方法
-* 自选运算符号，运算次数及运算范围
-* */
+
+/**
+ * 自定义难度的实现方法
+ * 自选运算符号，运算次数及运算范围
+ */
 public class CustomDialog {
     private static JLabel methor = new JLabel("符号:");
     private static JLabel times = new JLabel("次数:");

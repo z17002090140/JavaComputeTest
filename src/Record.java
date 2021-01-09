@@ -85,7 +85,7 @@ public class Record {
     }
 
     /**
-     * 本地新增一条做题记录
+     * 本地新增一条做题记录 同时下标往后移一个位置 保证访问的数据正常
      * @param record
      */
     public static void add(Record record) {
@@ -95,7 +95,7 @@ public class Record {
 
     /**
      * 获取上一题的做题记录
-     * @return Rcord 类
+     * @return Record类
      */
     public static Record getNext() {
         if (index < recordList.size() - 1) {
@@ -106,7 +106,7 @@ public class Record {
 
     /**
      * 获取下一题的做题记录
-     * @return
+     * @return Record类
      */
     public static Record getPre() {
         if (index > 0) {

@@ -29,9 +29,6 @@ public class ResultFrame {
     //编号
     private static Integer number = 1;
 
-    /**
-     *
-     */
     public ResultFrame(){
 
         computeResult = new JFrame(name);
@@ -86,7 +83,9 @@ public class ResultFrame {
 
         save.setSize(100, 30);
         save.setLocation(345, 460);
-        //保存按钮的事件
+        /**
+         * 保存按钮的事件
+         */
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -116,6 +115,9 @@ public class ResultFrame {
         resultPanel.add(save);
         computeResult.add(resultPanel);
 
+        /**
+         * 关闭窗体的事件 仅关闭当前窗体
+         */
         computeResult.addWindowListener(new WindowAdapter() {
             //窗体点击关闭时，要做的事
             @Override

@@ -74,6 +74,11 @@ public class Subjects {
         System.out.println(answer);
     }
 
+    /**
+     * 将字符串的表达式进行计算
+     * @param s 待计算的字符串
+     * @return 计算结果 转换为int类型 将结果四舍五入
+     */
     private int compute(String s){
         String t =  ExpressionToDouble.StringToRes(s + "=");
 //        System.out.println(t);

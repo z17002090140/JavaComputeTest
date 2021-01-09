@@ -17,7 +17,7 @@ import java.util.*;
 import java.util.List;
 
 /**
- * 查询历史界面 分页查询（15行）
+ * 查询历史界面 分页查询（默认一页15条记录）
  */
 public class SearchFrame {
     private static JFrame thisFrame;
@@ -47,7 +47,7 @@ public class SearchFrame {
     private JButton save;
 
     /**
-     * 查询页面样式
+     * 查询页面
      */
     public SearchFrame() {
         thisFrame = new JFrame("查询");
@@ -88,7 +88,7 @@ public class SearchFrame {
         thisFrame.add(save);
 
         /**
-         * 对查询历史按钮进行监听
+         * 保存按钮的事件
          */
         save.addActionListener(new ActionListener() {
             @Override
@@ -117,7 +117,9 @@ public class SearchFrame {
                 }
             }
         });
-
+        /**
+         * 上一页按钮的事件
+         */
         nextPage.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -131,7 +133,7 @@ public class SearchFrame {
             }
         });
         /**
-         * 上一题按钮的事件
+         * 上一页按钮的事件
          */
         prePage.addActionListener(new ActionListener() {
             @Override
@@ -147,7 +149,7 @@ public class SearchFrame {
         });
 
         /**
-         * 下一题按钮的事件
+         * 刷新按钮的事件
          */
         refresh.addActionListener(new ActionListener() {
             @Override
@@ -158,7 +160,9 @@ public class SearchFrame {
                 changeCurrent(page.getRecords());
             }
         });
-
+        /**
+         * 关闭窗体事件 仅关闭当前窗体
+         */
         thisFrame.addWindowListener(new WindowAdapter() {
             //窗体点击关闭时，要做的事
             @Override
@@ -169,7 +173,10 @@ public class SearchFrame {
         });
     }
 
-    //生成一个JTable用来导出全部数据到excel用
+    /**
+     * 用与生成表格存储后端传过来的该角色的所有数据 不显示 仅用于导出用
+     * @param recordDTOS 记录数组
+     */
     public static void getTable(List<RecordDTO> recordDTOS) {
         List<RecordDTO> list = recordDTOS;
         //生成JTable
@@ -207,8 +214,8 @@ public class SearchFrame {
     }
 
     /**
-     * 页面发生改变，调用后端数据
-     * @param recordDTOS
+     * 页面发生改变，调用后端数据 重新渲染表格
+     * @param recordDTOS 后端查询到的数据
      */
     public static void changeCurrent(List<RecordDTO> recordDTOS) {
         recordTableModel.setRecordDTOS(recordDTOS);
@@ -217,7 +224,7 @@ public class SearchFrame {
 
     /**
      * 通过用户名ID来获取后端相应数据
-     * @return
+     * @return 封装好分页信息的内容
      */
     public static IPage getRecordByUserId() {
         String userId = ComputeFrame.ID;
@@ -233,7 +240,7 @@ public class SearchFrame {
     /**
      *
      * 后端未分页数据
-     * @return
+     * @return 记录数组
      */
     public static List<RecordDTO> getAllRecords() {
         String userId = ComputeFrame.ID;

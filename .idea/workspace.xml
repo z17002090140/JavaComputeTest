@@ -32,17 +32,16 @@
       <change beforePath="$PROJECT_DIR$/out/production/JavaComputeTest/ComputeFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JavaComputeTest/ComputeFrame.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/JavaComputeTest/LoginFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JavaComputeTest/LoginFrame$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/JavaComputeTest/LoginFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JavaComputeTest/LoginFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/API.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/API.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ComputeFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ComputeFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CustomDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CustomDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTO/IPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/IPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTO/RecordDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/RecordDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DTO/RecordTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/RecordTableModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DTO/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/Response.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ExportExcel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExportExcel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExpressionToDouble.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExpressionToDouble.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LoginFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Record.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Record.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ResultFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ResultFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SearchFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SearchFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Subjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Subjects.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,9 +94,16 @@
       <recent name="E:\Study\JavaComputeTest\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.LoginFrame">
+  <component name="RunManager" selected="Application.ExpressionToDouble">
     <configuration name="ComputeFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ComputeFrame" />
+      <module name="JavaComputeTest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ExpressionToDouble" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ExpressionToDouble" />
       <module name="JavaComputeTest" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -124,20 +130,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Subjects" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Subjects" />
-      <module name="JavaComputeTest" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ExpressionToDouble" />
         <item itemvalue="Application.LoginFrame" />
         <item itemvalue="Application.ComputeFrame" />
         <item itemvalue="Application.ResultFrame" />
         <item itemvalue="Application.SearchFrame" />
-        <item itemvalue="Application.Subjects" />
       </list>
     </recent_temporary>
   </component>
@@ -165,6 +164,7 @@
       <workItem from="1609767436076" duration="6043000" />
       <workItem from="1609852275535" duration="2421000" />
       <workItem from="1610090596766" duration="1200000" />
+      <workItem from="1610155110340" duration="2959000" />
     </task>
     <task id="LOCAL-00001" summary="Value Sout">
       <created>1609660432816</created>
@@ -261,7 +261,7 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ORDER">
@@ -350,52 +350,52 @@
     <state x="445" y="153" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1609753828390" />
     <state x="464" y="160" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1609722787703" />
     <state x="445" y="153" key="FileChooserDialogImpl/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1609767482768" />
-    <state width="1493" height="98" key="GridCell.Tab.0.bottom" timestamp="1610098587110">
+    <state width="1493" height="250" key="GridCell.Tab.0.bottom" timestamp="1610156946235">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="98" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1610098587110" />
+    <state width="1493" height="250" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1610156946235" />
     <state width="1063" height="248" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1609728651374" />
     <state width="1493" height="250" key="GridCell.Tab.0.bottom/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1610094718576" />
-    <state width="1493" height="98" key="GridCell.Tab.0.center" timestamp="1610098587109">
+    <state width="1493" height="250" key="GridCell.Tab.0.center" timestamp="1610156946235">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="98" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1610098587109" />
+    <state width="1493" height="250" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1610156946235" />
     <state width="1063" height="248" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1609728651374" />
     <state width="1493" height="250" key="GridCell.Tab.0.center/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1610094718576" />
-    <state width="1493" height="98" key="GridCell.Tab.0.left" timestamp="1610098587109">
+    <state width="1493" height="250" key="GridCell.Tab.0.left" timestamp="1610156946235">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="98" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1610098587109" />
+    <state width="1493" height="250" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1610156946235" />
     <state width="1063" height="248" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1609728651374" />
     <state width="1493" height="250" key="GridCell.Tab.0.left/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1610094718576" />
-    <state width="1493" height="98" key="GridCell.Tab.0.right" timestamp="1610098587109">
+    <state width="1493" height="250" key="GridCell.Tab.0.right" timestamp="1610156946235">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="98" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1610098587109" />
+    <state width="1493" height="250" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1610156946235" />
     <state width="1063" height="248" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1609728651374" />
     <state width="1493" height="250" key="GridCell.Tab.0.right/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1610094718576" />
-    <state width="1493" height="250" key="GridCell.Tab.1.bottom" timestamp="1610094718489">
+    <state width="1493" height="250" key="GridCell.Tab.1.bottom" timestamp="1610156946550">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="746" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1609756119518" />
+    <state width="1493" height="250" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1610156946550" />
     <state width="1556" height="270" key="GridCell.Tab.1.bottom/0.0.1600.860@0.0.1600.860" timestamp="1609724587653" />
     <state width="1493" height="250" key="GridCell.Tab.1.bottom/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1610094718489" />
-    <state width="1493" height="250" key="GridCell.Tab.1.center" timestamp="1610094718488">
+    <state width="1493" height="250" key="GridCell.Tab.1.center" timestamp="1610156946550">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="746" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1609756119518" />
+    <state width="1493" height="250" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1610156946550" />
     <state width="1556" height="270" key="GridCell.Tab.1.center/0.0.1600.860@0.0.1600.860" timestamp="1609724587653" />
     <state width="1493" height="250" key="GridCell.Tab.1.center/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1610094718488" />
-    <state width="1493" height="250" key="GridCell.Tab.1.left" timestamp="1610094718488">
+    <state width="1493" height="250" key="GridCell.Tab.1.left" timestamp="1610156946550">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="746" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1609756119518" />
+    <state width="1493" height="250" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1610156946550" />
     <state width="1556" height="270" key="GridCell.Tab.1.left/0.0.1600.860@0.0.1600.860" timestamp="1609724587653" />
     <state width="1493" height="250" key="GridCell.Tab.1.left/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1610094718488" />
-    <state width="1493" height="250" key="GridCell.Tab.1.right" timestamp="1610094718489">
+    <state width="1493" height="250" key="GridCell.Tab.1.right" timestamp="1610156946550">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="746" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1609756119518" />
+    <state width="1493" height="250" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1610156946550" />
     <state width="1556" height="270" key="GridCell.Tab.1.right/0.0.1600.860@0.0.1600.860" timestamp="1609724587653" />
     <state width="1493" height="250" key="GridCell.Tab.1.right/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1610094718489" />
     <state x="141" y="0" key="MergeDialog" timestamp="1609772018956">

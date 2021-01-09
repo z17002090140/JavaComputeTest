@@ -6,20 +6,18 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-//导出为Excel
+/**
+ *通过resource文件夹中POI外部依赖来生成excel（字体、边框、背景色、居中）
+ */
 public class ExportExcel {
-    /**
-     *通过resource文件夹中POI外部依赖来生成excel（字体、边框、背景色、居中）
-     */
     JTable table;
     FileOutputStream fos;
 
     /**
-     * 导出的数据和路径
-     * @param table
-     * @param path
+     * 待导出的数据和路径
+     * @param table Jtable表格
+     * @param path 文件保存路径
      */
-
     public ExportExcel(JTable table,String path){
         this.table = table;
         File file = new File(path);
@@ -30,8 +28,11 @@ public class ExportExcel {
             e.printStackTrace();
         }
     }
-    public void export(){
 
+    /**
+     * 具体的导出方法 设置Excel表格属性等
+     */
+    public void export(){
         HSSFWorkbook wb = new HSSFWorkbook();
         HSSFSheet hs = wb.createSheet();
         hs.setDefaultColumnWidth(20);
