@@ -16,14 +16,14 @@ public class ExpressionToDouble {
     /**
      * 计算表达式中加减
      * @param s 待计算的表达式
-     * @param opration 操作符 （+ or -）
+     * @param operation 操作符 （+ or -）
      */
-    private static void hasAddOrSub(Stack<Character> s, char opration){
+    private static void hasAddOrSub(Stack<Character> s, char operation){
         StringBuilder number = new StringBuilder();
         //将符号前的数字提取出来
         while(true){
             char cur = s.peek();
-            if (cur == opration)
+            if (cur == operation)
                 break;
             number.insert(0, cur);
             s.pop();
@@ -46,7 +46,7 @@ public class ExpressionToDouble {
 
         double res = 0;
         //根据操作符来计算两个数的结果 将结果存回栈中
-        if (opration == '+')
+        if (operation == '+')
             res = left + right;
         else
             res = left -right;
@@ -59,13 +59,13 @@ public class ExpressionToDouble {
     /**
      * 计算乘除的情况 将表达式中的所有乘除先计算掉
      * @param s 待计算的表达式
-     * @param opration 操作符 （* or /）
+     * @param operation 操作符 （* or /）
      */
-    private static void hasMulOrDiv(Stack<Character> s, char opration){
+    private static void hasMulOrDiv(Stack<Character> s, char operation){
         StringBuilder number = new StringBuilder();
         while(true){
             char cur = s.peek();
-            if (cur == opration)
+            if (cur == operation)
                 break;
             number.insert(0, cur);
             s.pop();
@@ -86,7 +86,7 @@ public class ExpressionToDouble {
         double left = Double.parseDouble(number.toString());
         number.replace(0, number.length(), "");
         double res = 0;
-        if (opration == '*')
+        if (operation == '*')
             res = left * right;
         else
             res = left / right;
@@ -134,6 +134,8 @@ public class ExpressionToDouble {
                 s.push(ch);
             }
             else{
+                //碰到下一个符号前，计算前一个符号的结果，如果下一个符号是*/则只计算乘除，如果下一个符号是+- 则先乘除后加减
+                //遍历到等号为止，等号时判断依旧先判断乘除后判断加减 遍历到等号时每个符号最多只会有一个
                 switch(ch){
                     case '+':
                         if (hasMul){
@@ -239,5 +241,8 @@ public class ExpressionToDouble {
             }
         }
         return "";
+    }
+    public static void main(String[] args) {
+        System.out.println(StringToRes("3*3+3*3*3="));
     }
 }
