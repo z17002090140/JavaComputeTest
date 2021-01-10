@@ -67,6 +67,7 @@ public class ResultFrame {
         table.setSize(600, 450);
         table.setPreferredScrollableViewportSize(new Dimension(600, 450));
         table.setEnabled(false);
+        table.setRowHeight(25);
         TableColumn column = null;
         int colunms = table.getColumnCount();
         for (int i = 0; i < colunms; i++) {

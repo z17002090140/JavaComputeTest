@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -66,6 +67,7 @@ public class SearchFrame {
 
         changeCurrent(recordDTOS);
 
+        thisTable.setRowHeight(37);
         scroll = new JScrollPane(thisTable);
         scroll.setSize(600, 400);
         scroll.setLocation(90, 30);
